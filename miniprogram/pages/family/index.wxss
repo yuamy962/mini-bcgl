@@ -3,13 +3,13 @@
 }
 
 .member-card {
-  margin-bottom: 20rpx;
+  margin-bottom: 24rpx;
 }
 
 .member-item {
   display: flex;
   align-items: center;
-  padding: 20rpx 0;
+  padding: 24rpx 0;
   border-bottom: 1rpx solid var(--border);
 }
 
@@ -30,7 +30,7 @@
 .member-name {
   font-size: 30rpx;
   color: var(--text-main);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .member-role {
@@ -43,18 +43,18 @@
   font-size: 28rpx;
   color: var(--text-tertiary);
   text-align: center;
-  padding: 20rpx 0;
+  padding: 24rpx 0;
 }
 
 .operation-list {
-  padding: 0 30rpx;
+  padding: 0 32rpx;
 }
 
 .operation-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20rpx 0;
+  padding: 22rpx 0;
   border-bottom: 1rpx solid var(--border);
 }
 
@@ -79,13 +79,14 @@
 .btn-delete {
   background: var(--danger-bg);
   color: var(--danger);
-  border-radius: 44rpx;
+  border-radius: var(--radius-btn);
   height: 88rpx;
   line-height: 88rpx;
   font-size: 32rpx;
   text-align: center;
   border: none;
   margin-top: 20rpx;
+  font-weight: 500;
 }
 
 .btn-delete::after {
@@ -98,7 +99,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.35);
   z-index: 200;
   display: flex;
   flex-direction: column;
@@ -108,13 +109,13 @@
 .share-tip-panel {
   background: var(--white);
   border-radius: 32rpx 32rpx 0 0;
-  padding: 40rpx 30rpx;
-  padding-bottom: calc(40rpx + env(safe-area-inset-bottom));
+  padding: 44rpx 32rpx;
+  padding-bottom: calc(44rpx + env(safe-area-inset-bottom));
 }
 
 .share-tip-title {
-  font-size: 32rpx;
-  font-weight: 600;
+  font-size: 34rpx;
+  font-weight: 700;
   text-align: center;
   margin-bottom: 24rpx;
   color: var(--text-main);
@@ -124,7 +125,7 @@
   font-size: 28rpx;
   color: var(--text-secondary);
   line-height: 1.6;
-  margin-bottom: 30rpx;
+  margin-bottom: 32rpx;
 }
 
 .share-tip-close {

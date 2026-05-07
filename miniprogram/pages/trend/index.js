@@ -85,13 +85,13 @@ Page({
       isRising = Number(last3[1].value) > Number(last3[0].value) && Number(last3[2].value) > Number(last3[1].value);
     }
     if (value > 10) {
-      risk = { level: 'high', text: 'TPSA > 10，建议尽快就医检查' };
+      risk = { level: 'high', text: '建议持续关注指标变化，并结合医生意见定期复查' };
     } else if (value > 4) {
-      risk = { level: 'medium', text: 'TPSA > 4，建议持续关注并结合医生意见复查' };
+      risk = { level: 'medium', text: '建议持续关注指标变化，并结合医生意见定期复查' };
     }
     if (isRising) {
       risk = risk || { level: 'medium', text: '' };
-      risk.text = risk.text ? risk.text + '；指标连续上升，请关注后续变化' : '指标连续上升，请关注后续变化';
+      risk.text = risk.text ? risk.text + '，近期指标呈连续上升趋势，请留意后续变化' : '近期指标呈连续上升趋势，请留意后续变化';
     }
     this.setData({ riskInfo: risk });
   },

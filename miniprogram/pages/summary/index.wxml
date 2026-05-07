@@ -2,7 +2,6 @@
   <loading-state wx:if="{{loading}}" />
 
   <block wx:if="{{!loading && summaryData}}">
-    <!-- 隐藏画布用于生成图片 -->
     <canvas canvas-id="summaryCanvas" class="hidden-canvas"></canvas>
 
     <view class="summary-content">
@@ -10,68 +9,53 @@
       <view class="summary-header">
         <view class="summary-title">病程摘要</view>
         <view class="summary-meta">
-          <text>患者：{{summaryData.patientInfo.name || ''}}</text>
-          <text>生成于 {{summaryData.generatedAt}}</text>
+          <text>患者 {{summaryData.patientInfo.name || ''}}</text>
+          <text>{{summaryData.generatedAt}} 整理</text>
         </view>
       </view>
 
-      <!-- 指标变化 -->
-      <view class="section-block">
-        <view class="block-title">指标变化（TPSA）</view>
+      <!-- 自然语言总结区块 -->
+      <view class="section-block narrative-block" wx:if="{{summaryData.psaTrend || summaryData.treatments.length > 0 || summaryData.checks.length > 0}}">
+        <view class="block-title">最近病情变化</view>
+        <view class="narrative-list">
+          <view class="narrative-item" wx:if="{{summaryData.psaTrend}}">
+            <view class="narrative-dot {{summaryData.psaTrend.direction === 'down' ? 'down' : summaryData.psaTrend.direction === 'up' ? 'up' : ''}}"></view>
+            <text class="narrative-text">PSA 从 {{summaryData.psaTrend.from}} {{summaryData.psaTrend.direction === 'down' ? '降至' : '升至'}} {{summaryData.psaTrend.to}}</text>
+          </view>
+          <view class="narrative-item" wx:for="{{summaryData.treatments}}" wx:key="_id">
+            <view class="narrative-dot green"></view>
+            <text class="narrative-text">{{item.date}} {{item.title}}</text>
+          </view>
+          <view class="narrative-item" wx:for="{{summaryData.checks}}" wx:key="_id">
+            <view class="narrative-dot purple"></view>
+            <text class="narrative-text">{{item.date}} 完成{{item.checkType || '检查'}}</text>
+          </view>
+          <view class="narrative-item" wx:for="{{summaryData.visits}}" wx:key="_id" wx:if="{{item.doctorAdvice}}">
+            <view class="narrative-dot cyan"></view>
+            <text class="narrative-text">医生建议：{{item.doctorAdvice}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 指标明细 -->
+      <view class="section-block" wx:if="{{summaryData.psaList.length > 0}}">
+        <view class="block-title">指标记录</view>
         <view class="block-list">
           <view class="block-item" wx:for="{{summaryData.psaList}}" wx:key="_id">
             <text class="item-date">{{item.date}}</text>
             <text class="item-value">{{item.value}} ng/mL</text>
           </view>
-          <view class="block-empty" wx:if="{{summaryData.psaList.length === 0}}">暂无记录</view>
-        </view>
-      </view>
-
-      <!-- 治疗记录 -->
-      <view class="section-block">
-        <view class="block-title">治疗记录</view>
-        <view class="block-list">
-          <view class="block-item" wx:for="{{summaryData.treatments}}" wx:key="_id">
-            <text class="item-date">{{item.date}}</text>
-            <text class="item-text">{{item.title}}</text>
-          </view>
-          <view class="block-empty" wx:if="{{summaryData.treatments.length === 0}}">暂无记录</view>
-        </view>
-      </view>
-
-      <!-- 检查记录 -->
-      <view class="section-block">
-        <view class="block-title">检查记录</view>
-        <view class="block-list">
-          <view class="block-item" wx:for="{{summaryData.checks}}" wx:key="_id">
-            <text class="item-date">{{item.date}}</text>
-            <text class="item-text">{{item.title}}</text>
-          </view>
-          <view class="block-empty" wx:if="{{summaryData.checks.length === 0}}">暂无记录</view>
-        </view>
-      </view>
-
-      <!-- 医生建议 -->
-      <view class="section-block">
-        <view class="block-title">医生建议</view>
-        <view class="block-list">
-          <view class="block-item" wx:for="{{summaryData.visits}}" wx:key="_id">
-            <text class="item-date">{{item.date}}</text>
-            <text class="item-text">{{item.doctorAdvice || item.title}}</text>
-          </view>
-          <view class="block-empty" wx:if="{{summaryData.visits.length === 0}}">暂无记录</view>
         </view>
       </view>
 
       <!-- 即将到期 -->
-      <view class="section-block">
-        <view class="block-title">即将到期事项</view>
+      <view class="section-block" wx:if="{{summaryData.reminders.length > 0}}">
+        <view class="block-title">即将到期</view>
         <view class="block-list">
           <view class="block-item" wx:for="{{summaryData.reminders}}" wx:key="_id">
             <text class="item-date">{{item.nextDate}}</text>
             <text class="item-text">{{item.title}}</text>
           </view>
-          <view class="block-empty" wx:if="{{summaryData.reminders.length === 0}}">暂无记录</view>
         </view>
       </view>
 
@@ -81,7 +65,6 @@
       </view>
     </view>
 
-    <!-- 操作按钮 -->
     <view class="summary-actions">
       <button class="btn-primary" bindtap="onGenerateImage" loading="{{generatingImage}}">生成长图</button>
       <button class="btn-share" open-type="share">分享给医生</button>

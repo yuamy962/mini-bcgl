@@ -3,7 +3,7 @@
 }
 
 .reminder-list {
-  padding: 0 30rpx;
+  padding: 0 32rpx;
 }
 
 .reminder-card {
@@ -12,13 +12,13 @@
   align-items: center;
   background: var(--white);
   border-radius: var(--radius);
-  padding: 24rpx;
-  margin-bottom: 16rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.03);
+  padding: 24rpx 32rpx;
+  margin-bottom: 20rpx;
+  box-shadow: var(--shadow-card);
 }
 
 .reminder-card.inactive {
-  opacity: 0.6;
+  opacity: 0.55;
 }
 
 .reminder-main {
@@ -34,16 +34,17 @@
 
 .reminder-title {
   font-size: 30rpx;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-main);
   margin-right: 12rpx;
 }
 
 .reminder-type-tag {
   font-size: 20rpx;
+  font-weight: 500;
   color: var(--primary);
-  background: var(--primary-bg);
-  padding: 2rpx 10rpx;
+  background: var(--primary-light);
+  padding: 2rpx 12rpx;
   border-radius: 6rpx;
 }
 
@@ -62,7 +63,7 @@
   font-size: 22rpx;
   color: var(--text-tertiary);
   background: var(--bg);
-  padding: 2rpx 10rpx;
+  padding: 2rpx 12rpx;
   border-radius: 6rpx;
 }
 
@@ -86,7 +87,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.35);
   z-index: 200;
   display: flex;
   flex-direction: column;
@@ -96,20 +97,20 @@
 .form-panel {
   background: var(--white);
   border-radius: 32rpx 32rpx 0 0;
-  padding: 30rpx;
-  padding-bottom: calc(30rpx + env(safe-area-inset-bottom));
+  padding: 36rpx 32rpx;
+  padding-bottom: calc(36rpx + env(safe-area-inset-bottom));
 }
 
 .form-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30rpx;
+  margin-bottom: 32rpx;
 }
 
 .form-title {
-  font-size: 32rpx;
-  font-weight: 600;
+  font-size: 34rpx;
+  font-weight: 700;
   color: var(--text-main);
 }
 
@@ -122,21 +123,21 @@
 .float-add-btn {
   position: fixed;
   bottom: 80rpx;
-  right: 40rpx;
-  width: 100rpx;
-  height: 100rpx;
+  right: 32rpx;
+  width: 96rpx;
+  height: 96rpx;
   background: var(--primary);
-  border-radius: 50%;
+  border-radius: var(--radius-pill);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4rpx 20rpx rgba(43, 106, 255, 0.35);
+  box-shadow: var(--shadow-float);
   z-index: 100;
 }
 
 .add-icon {
   color: var(--white);
-  font-size: 56rpx;
+  font-size: 52rpx;
   font-weight: 300;
-  line-height: 100rpx;
+  line-height: 96rpx;
 }

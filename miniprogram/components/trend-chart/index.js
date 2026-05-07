@@ -6,21 +6,20 @@ Component({
     },
   },
 
-  data: {
-    canvasWidth: 0,
-    canvasHeight: 0,
-  },
+  data: {},
 
   lifetimes: {
     attached() {
+      this._initPending = true;
       this.initCanvas();
     },
   },
 
   observers: {
     'data': function(data) {
-      if (data && data.length > 0 && this.canvasCtx) {
-        this.drawChart();
+      if (data && data.length > 0) {
+        this._pendingData = data;
+        this.tryDraw();
       }
     },
   },
@@ -28,49 +27,47 @@ Component({
   methods: {
     initCanvas() {
       const query = this.createSelectorQuery();
-      query.select('.chart-canvas').boundingClientRect();
+      query.select('.trend-chart-wrap').boundingClientRect();
       query.exec((res) => {
         if (res && res[0]) {
           const rect = res[0];
-          const dpr = wx.getSystemInfoSync().pixelRatio;
-          this.setData({
-            canvasWidth: rect.width,
-            canvasHeight: rect.height,
-          });
+          this.canvasWidth = rect.width;
+          this.canvasHeight = rect.height;
+          this.dpr = wx.getSystemInfoSync().pixelRatio;
           this.canvasCtx = wx.createCanvasContext('trendCanvas', this);
-          this.dpr = dpr;
-          if (this.properties.data && this.properties.data.length > 0) {
-            this.drawChart();
-          }
+          this._initPending = false;
+          this.tryDraw();
         }
       });
     },
 
-    drawChart() {
+    tryDraw() {
+      if (this._initPending || !this.canvasCtx) return;
+      if (this._pendingData && this._pendingData.length > 0) {
+        this.drawChart(this._pendingData);
+        this._pendingData = null;
+      }
+    },
+
+    drawChart(data) {
       const ctx = this.canvasCtx;
       const dpr = this.dpr || 1;
-      const { canvasWidth, canvasHeight } = this.data;
-      const data = this.properties.data;
+      const width = this.canvasWidth;
+      const height = this.canvasHeight;
 
       if (!ctx || !data || data.length === 0) return;
 
-      const width = canvasWidth;
-      const height = canvasHeight;
-
-      // 高清适配
       ctx.scale(dpr, dpr);
       const w = width / dpr;
       const h = height / dpr;
 
-      // 边距
-      const padding = { top: 30, bottom: 30, left: 44, right: 16 };
+      const padding = { top: 36, bottom: 36, left: 48, right: 20 };
       const chartW = w - padding.left - padding.right;
       const chartH = h - padding.top - padding.bottom;
 
-      // 清空
       ctx.clearRect(0, 0, w, h);
 
-      // 计算数值范围
+      // 数值范围
       const values = data.map(d => Number(d.value));
       let minVal = Math.min(...values);
       let maxVal = Math.max(...values);
@@ -78,17 +75,15 @@ Component({
         minVal = Math.max(0, minVal - 1);
         maxVal = maxVal + 1;
       }
-      const range = maxVal - minVal || 1;
-      const step = Math.ceil(range / 4);
-      const yMin = Math.max(0, Math.floor(minVal - step * 0.2));
-      const yMax = Math.ceil(maxVal + step * 0.2);
+      const yMin = Math.max(0, Math.floor(minVal - (maxVal - minVal) * 0.15));
+      const yMax = Math.ceil(maxVal + (maxVal - minVal) * 0.15);
       const yRange = yMax - yMin || 1;
 
-      // 绘制网格线和 Y 轴标签
-      ctx.setStrokeStyle('#EEEEEE');
+      // 网格线 + Y轴标签
+      ctx.setStrokeStyle('#F0F0F0');
       ctx.setLineWidth(0.5);
       ctx.setFontSize(10);
-      ctx.setFillStyle('#999999');
+      ctx.setFillStyle('#BBBBBB');
       ctx.setTextAlign('right');
 
       const gridCount = 4;
@@ -99,7 +94,7 @@ Component({
         ctx.moveTo(padding.left, y);
         ctx.lineTo(padding.left + chartW, y);
         ctx.stroke();
-        ctx.fillText(String(Math.round(yVal * 10) / 10), padding.left - 6, y + 3);
+        ctx.fillText(String(Math.round(yVal * 10) / 10), padding.left - 8, y + 3);
       }
 
       // 计算点坐标
@@ -109,9 +104,11 @@ Component({
         return { x, y, value: item.value, date: item.date };
       });
 
-      // 绘制折线
-      ctx.setStrokeStyle('#2B6AFF');
-      ctx.setLineWidth(2);
+      // 平滑折线
+      ctx.setStrokeStyle('#4A7CFF');
+      ctx.setLineWidth(2.5);
+      ctx.setLineJoin('round');
+      ctx.setLineCap('round');
       ctx.beginPath();
       points.forEach((p, i) => {
         if (i === 0) ctx.moveTo(p.x, p.y);
@@ -119,39 +116,39 @@ Component({
       });
       ctx.stroke();
 
-      // 绘制渐变填充区域
+      // 渐变填充
       ctx.beginPath();
       ctx.moveTo(points[0].x, padding.top + chartH);
       points.forEach(p => ctx.lineTo(p.x, p.y));
       ctx.lineTo(points[points.length - 1].x, padding.top + chartH);
       ctx.closePath();
       const grd = ctx.createLinearGradient(0, padding.top, 0, padding.top + chartH);
-      grd.addColorStop(0, 'rgba(43, 106, 255, 0.12)');
-      grd.addColorStop(1, 'rgba(43, 106, 255, 0.01)');
+      grd.addColorStop(0, 'rgba(74, 124, 255, 0.15)');
+      grd.addColorStop(1, 'rgba(74, 124, 255, 0.02)');
       ctx.setFillStyle(grd);
       ctx.fill();
 
-      // 绘制数据点
+      // 数据点
       points.forEach((p, i) => {
         ctx.beginPath();
-        ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
         ctx.setFillStyle('#FFFFFF');
         ctx.fill();
-        ctx.setStrokeStyle('#2B6AFF');
-        ctx.setLineWidth(1.5);
+        ctx.setStrokeStyle('#4A7CFF');
+        ctx.setLineWidth(2);
         ctx.stroke();
 
-        // 数值标签（最左和最右，以及最大值）
+        // 数值标签
         if (i === 0 || i === points.length - 1 || p.value === maxVal) {
-          ctx.setFillStyle('#2B6AFF');
+          ctx.setFillStyle('#4A7CFF');
           ctx.setFontSize(11);
           ctx.setTextAlign('center');
-          ctx.fillText(String(p.value), p.x, p.y - 8);
+          ctx.fillText(String(p.value), p.x, p.y - 10);
         }
       });
 
-      // X 轴日期标签
-      ctx.setFillStyle('#999999');
+      // X轴日期
+      ctx.setFillStyle('#BBBBBB');
       ctx.setFontSize(10);
       const showIndices = [0, Math.floor((points.length - 1) / 2), points.length - 1];
       showIndices.forEach(idx => {
@@ -159,7 +156,7 @@ Component({
           const p = points[idx];
           ctx.setTextAlign(idx === 0 ? 'left' : idx === points.length - 1 ? 'right' : 'center');
           const dateStr = p.date ? p.date.slice(5) : '';
-          ctx.fillText(dateStr, p.x, padding.top + chartH + 14);
+          ctx.fillText(dateStr, p.x, padding.top + chartH + 16);
         }
       });
 

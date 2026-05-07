@@ -7,8 +7,8 @@
   align-items: center;
   justify-content: space-between;
   background: var(--warning-bg);
-  padding: 16rpx 30rpx;
-  margin-bottom: 20rpx;
+  padding: 18rpx 32rpx;
+  margin-bottom: 24rpx;
 }
 
 .disclaimer-text {
@@ -23,31 +23,34 @@
   color: var(--primary);
   margin-left: 20rpx;
   flex-shrink: 0;
+  font-weight: 500;
 }
 
 .range-tabs {
   display: flex;
   justify-content: center;
-  margin-bottom: 20rpx;
+  margin-bottom: 24rpx;
 }
 
 .range-tab {
   font-size: 26rpx;
   color: var(--text-secondary);
-  padding: 10rpx 30rpx;
+  padding: 10rpx 32rpx;
   margin: 0 8rpx;
-  border-radius: 32rpx;
+  border-radius: var(--radius-pill);
   background: var(--white);
+  box-shadow: var(--shadow-card);
 }
 
 .range-tab.active {
   background: var(--primary);
   color: var(--white);
+  font-weight: 500;
 }
 
 .chart-card {
-  padding: 20rpx;
-  margin-bottom: 20rpx;
+  padding: 24rpx;
+  margin-bottom: 24rpx;
 }
 
 .chart-empty {
@@ -63,9 +66,9 @@
 }
 
 .risk-bar {
-  margin: 0 30rpx 20rpx;
-  padding: 20rpx 24rpx;
-  border-radius: 12rpx;
+  margin: 0 32rpx 24rpx;
+  padding: 24rpx 28rpx;
+  border-radius: var(--radius);
 }
 
 .risk-bar.high {
@@ -77,20 +80,20 @@
 }
 
 .risk-text {
-  font-size: 26rpx;
+  font-size: 28rpx;
   color: var(--text-main);
   line-height: 1.5;
 }
 
 .record-list {
-  padding: 0 30rpx;
+  padding: 0 32rpx;
 }
 
 .record-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20rpx 0;
+  padding: 22rpx 0;
   border-bottom: 1rpx solid var(--border);
 }
 
@@ -106,7 +109,7 @@
 
 .record-value {
   font-size: 30rpx;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-main);
   flex: 1;
   text-align: center;

@@ -5,7 +5,9 @@
   <view class="patient-header" bindtap="goToEditProfile" wx:if="{{hasProfile && patientInfo}}">
     <text class="patient-name">{{patientInfo.name}}</text>
     <text class="patient-tag" wx:if="{{patientInfo.cancerType}}">{{patientInfo.cancerType}}</text>
-    <text class="patient-status" wx:if="{{patientInfo.treatmentStatus}}">{{patientInfo.treatmentStatus}}</text>
+    <text class="patient-status status-observe" wx:if="{{patientInfo.treatmentStatus === '观察中'}}">{{patientInfo.treatmentStatus}}</text>
+    <text class="patient-status status-treat" wx:if="{{patientInfo.treatmentStatus === '治疗中'}}">{{patientInfo.treatmentStatus}}</text>
+    <text class="patient-status status-recover" wx:if="{{patientInfo.treatmentStatus === '康复期'}}">{{patientInfo.treatmentStatus}}</text>
   </view>
 
   <block wx:if="{{!loading && hasProfile && homeData}}">

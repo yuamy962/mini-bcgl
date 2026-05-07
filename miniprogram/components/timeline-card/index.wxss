@@ -3,19 +3,40 @@
   align-items: flex-start;
   background: var(--white);
   border-radius: var(--radius);
-  padding: 24rpx;
-  margin-bottom: 16rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.03);
+  padding: 28rpx 32rpx;
+  margin-bottom: 20rpx;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
 }
 
+/* 左侧类型色条 */
+.timeline-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 24rpx;
+  bottom: 24rpx;
+  width: 6rpx;
+  border-radius: 0 4rpx 4rpx 0;
+  background: var(--type-note);
+}
+
+.timeline-card.type-psa::before { background: var(--type-psa); }
+.timeline-card.type-check::before { background: var(--type-check); }
+.timeline-card.type-injection::before { background: var(--type-injection); }
+.timeline-card.type-medicine::before { background: var(--type-medicine); }
+.timeline-card.type-visit::before { background: var(--type-visit); }
+.timeline-card.type-note::before { background: var(--type-note); }
+
 .card-icon {
-  font-size: 40rpx;
+  font-size: 36rpx;
   margin-right: 20rpx;
   flex-shrink: 0;
-  width: 60rpx;
-  height: 60rpx;
-  background: var(--primary-bg);
-  border-radius: 12rpx;
+  width: 56rpx;
+  height: 56rpx;
+  background: var(--primary-light);
+  border-radius: 14rpx;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,7 +49,7 @@
 
 .card-title {
   font-size: 30rpx;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-main);
   margin-bottom: 8rpx;
   word-break: break-all;
@@ -37,17 +58,25 @@
 .card-meta {
   display: flex;
   align-items: center;
-  margin-bottom: 8rpx;
+  margin-bottom: 6rpx;
 }
 
 .meta-type {
   font-size: 22rpx;
-  color: var(--primary);
-  background: var(--primary-bg);
-  padding: 2rpx 10rpx;
+  font-weight: 500;
+  padding: 2rpx 12rpx;
   border-radius: 6rpx;
   margin-right: 12rpx;
+  background: var(--primary-light);
+  color: var(--primary);
 }
+
+.meta-type.type-psa { background: var(--primary-light); color: var(--type-psa); }
+.meta-type.type-check { background: #F3E5F5; color: var(--type-check); }
+.meta-type.type-injection { background: var(--success-bg); color: var(--type-injection); }
+.meta-type.type-medicine { background: var(--warning-bg); color: var(--type-medicine); }
+.meta-type.type-visit { background: #E0F7FA; color: var(--type-visit); }
+.meta-type.type-note { background: var(--bg); color: var(--type-note); }
 
 .meta-date {
   font-size: 22rpx;
@@ -55,12 +84,12 @@
 }
 
 .card-extra {
-  margin-top: 6rpx;
+  margin-top: 4rpx;
 }
 
 .extra-value {
-  font-size: 32rpx;
-  font-weight: 600;
+  font-size: 30rpx;
+  font-weight: 700;
   color: var(--primary);
 }
 

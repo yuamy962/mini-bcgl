@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10rpx 0;
+  padding: 16rpx 0 8rpx;
 }
 
 .status-item {
@@ -19,7 +19,7 @@
 }
 
 .status-value {
-  font-size: 36rpx;
+  font-size: 40rpx;
   font-weight: 700;
   color: var(--text-main);
 }
@@ -49,6 +49,6 @@
 
 .status-divider {
   width: 1rpx;
-  height: 60rpx;
+  height: 64rpx;
   background: var(--border);
 }

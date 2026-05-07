@@ -5,14 +5,15 @@
 .patient-header {
   display: flex;
   align-items: center;
-  padding: 20rpx 30rpx;
+  padding: 24rpx 32rpx;
   background: var(--white);
-  margin-bottom: 20rpx;
+  margin-bottom: 32rpx;
+  box-shadow: var(--shadow-card);
 }
 
 .patient-name {
   font-size: 36rpx;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-main);
   margin-right: 16rpx;
 }
@@ -20,19 +21,23 @@
 .patient-tag {
   font-size: 22rpx;
   color: var(--primary);
-  background: var(--primary-bg);
+  background: var(--primary-light);
   padding: 4rpx 16rpx;
   border-radius: 8rpx;
   margin-right: 12rpx;
+  font-weight: 500;
 }
 
 .patient-status {
   font-size: 22rpx;
-  color: var(--success);
-  background: var(--success-bg);
   padding: 4rpx 16rpx;
   border-radius: 8rpx;
+  font-weight: 500;
 }
+
+.patient-status.status-observe { color: var(--success); background: var(--success-bg); }
+.patient-status.status-treat { color: var(--primary); background: var(--primary-light); }
+.patient-status.status-recover { color: var(--warning); background: var(--warning-bg); }
 
 .summary-wrap {
   position: relative;
@@ -40,14 +45,15 @@
 
 .summary-more {
   text-align: right;
-  margin-top: 16rpx;
-  padding-top: 16rpx;
+  margin-top: 20rpx;
+  padding-top: 20rpx;
   border-top: 1rpx solid var(--border);
 }
 
 .more-text {
   font-size: 26rpx;
   color: var(--primary);
+  font-weight: 500;
 }
 
 .quick-actions {
@@ -55,8 +61,9 @@
   justify-content: space-between;
   background: var(--white);
   border-radius: var(--radius);
-  padding: 30rpx;
-  margin-bottom: 20rpx;
+  padding: 36rpx 32rpx;
+  margin-bottom: 32rpx;
+  box-shadow: var(--shadow-card);
 }
 
 .action-item {
@@ -79,21 +86,21 @@
 .float-add-btn {
   position: fixed;
   bottom: 180rpx;
-  right: 40rpx;
-  width: 100rpx;
-  height: 100rpx;
+  right: 32rpx;
+  width: 96rpx;
+  height: 96rpx;
   background: var(--primary);
-  border-radius: 50%;
+  border-radius: var(--radius-pill);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4rpx 20rpx rgba(43, 106, 255, 0.35);
+  box-shadow: var(--shadow-float);
   z-index: 100;
 }
 
 .add-icon {
   color: var(--white);
-  font-size: 56rpx;
+  font-size: 52rpx;
   font-weight: 300;
-  line-height: 100rpx;
+  line-height: 96rpx;
 }

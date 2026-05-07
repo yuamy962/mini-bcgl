@@ -1,17 +1,18 @@
 .date-divider {
   display: flex;
   align-items: center;
-  padding: 20rpx 0;
+  padding: 24rpx 0 16rpx;
 }
 
 .divider-line {
   flex: 1;
   height: 1rpx;
-  background: var(--border);
+  background: var(--timeline-line);
 }
 
 .divider-date {
   font-size: 24rpx;
+  font-weight: 500;
   color: var(--text-tertiary);
   padding: 0 20rpx;
   flex-shrink: 0;

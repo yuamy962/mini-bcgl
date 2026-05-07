@@ -3,27 +3,27 @@
 }
 
 .timeline-list {
-  padding: 0 30rpx;
+  padding: 0 32rpx;
 }
 
 .float-add-btn {
   position: fixed;
   bottom: 80rpx;
-  right: 40rpx;
-  width: 100rpx;
-  height: 100rpx;
+  right: 32rpx;
+  width: 96rpx;
+  height: 96rpx;
   background: var(--primary);
-  border-radius: 50%;
+  border-radius: var(--radius-pill);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4rpx 20rpx rgba(43, 106, 255, 0.35);
+  box-shadow: var(--shadow-float);
   z-index: 100;
 }
 
 .add-icon {
   color: var(--white);
-  font-size: 56rpx;
+  font-size: 52rpx;
   font-weight: 300;
-  line-height: 100rpx;
+  line-height: 96rpx;
 }
