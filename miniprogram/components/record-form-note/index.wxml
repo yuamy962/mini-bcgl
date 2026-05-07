@@ -1,15 +1,17 @@
-<view class="form-body">
-  <view class="form-group">
-    <text class="form-label">日期 <text class="required">*</text></text>
-    <picker mode="date" bindchange="onDateChange" value="{{form.date}}" end="{{today}}">
-      <view class="picker-value">{{form.date}}</view>
-    </picker>
-  </view>
-
-  <view class="form-group">
-    <text class="form-label">备注内容 <text class="required">*</text></text>
-    <textarea class="form-textarea" placeholder="请输入备注内容，例如：最近腰疼、排尿困难、状态较好等" value="{{form.content}}" bindinput="onContentInput" maxlength="500" />
-  </view>
-
-  <button class="btn-primary" bindtap="onSubmit">保存</button>
+<view class="form-card">
+  <picker mode="date" bindchange="onDateChange" value="{{form.date}}" end="{{today}}">
+    <view class="form-cell form-cell-arrow">
+      <text class="form-cell-label">日期 <text class="required">*</text></text>
+      <text class="form-cell-value {{form.date ? '' : 'placeholder'}}">{{form.date || '请选择日期'}}</text>
+    </view>
+  </picker>
 </view>
+
+<view class="form-card">
+  <view class="form-cell form-cell-textarea">
+    <view class="form-cell-label">备注内容 <text class="required">*</text></view>
+    <textarea placeholder="请输入备注内容，例如：最近腰疼、排尿困难、状态较好等" placeholder-class="placeholder" value="{{form.content}}" bindinput="onContentInput" maxlength="500" />
+  </view>
+</view>
+
+<button class="btn-primary" bindtap="onSubmit">保存</button>

@@ -1,30 +1,36 @@
-<view class="form-body">
-  <view class="form-group">
-    <text class="form-label">医院</text>
-    <input class="form-input" placeholder="请输入医院（可选）" value="{{form.hospital}}" bindinput="onHospitalInput" />
+<view class="form-card">
+  <view class="form-cell">
+    <text class="form-cell-label">医院</text>
+    <input class="form-cell-input" placeholder="可选" placeholder-class="placeholder" value="{{form.hospital}}" bindinput="onHospitalInput" />
   </view>
 
-  <view class="form-group">
-    <text class="form-label">复诊日期 <text class="required">*</text></text>
-    <picker mode="date" bindchange="onDateChange" value="{{form.date}}" end="{{today}}">
-      <view class="picker-value">{{form.date}}</view>
-    </picker>
-  </view>
-
-  <view class="form-group">
-    <text class="form-label">医生建议 <text class="required">*</text></text>
-    <textarea class="form-textarea" placeholder="请输入医生建议" value="{{form.doctorAdvice}}" bindinput="onAdviceInput" maxlength="1000" />
-  </view>
-
-  <view class="form-group">
-    <text class="form-label">后续方案</text>
-    <textarea class="form-textarea" placeholder="请输入后续治疗方案（可选）" value="{{form.followUp}}" bindinput="onFollowUpInput" maxlength="1000" />
-  </view>
-
-  <view class="form-group">
-    <text class="form-label">备注</text>
-    <textarea class="form-textarea" placeholder="其他备注（可选）" value="{{form.remark}}" bindinput="onRemarkInput" maxlength="500" />
-  </view>
-
-  <button class="btn-primary" bindtap="onSubmit">保存</button>
+  <picker mode="date" bindchange="onDateChange" value="{{form.date}}" end="{{today}}">
+    <view class="form-cell form-cell-arrow">
+      <text class="form-cell-label">复诊日期 <text class="required">*</text></text>
+      <text class="form-cell-value {{form.date ? '' : 'placeholder'}}">{{form.date || '请选择日期'}}</text>
+    </view>
+  </picker>
 </view>
+
+<view class="form-card">
+  <view class="form-cell form-cell-textarea">
+    <view class="form-cell-label">医生建议 <text class="required">*</text></view>
+    <textarea placeholder="请输入医生建议" placeholder-class="placeholder" value="{{form.doctorAdvice}}" bindinput="onAdviceInput" maxlength="1000" />
+  </view>
+</view>
+
+<view class="form-card">
+  <view class="form-cell form-cell-textarea">
+    <view class="form-cell-label">后续方案</view>
+    <textarea placeholder="请输入后续治疗方案（可选）" placeholder-class="placeholder" value="{{form.followUp}}" bindinput="onFollowUpInput" maxlength="1000" />
+  </view>
+</view>
+
+<view class="form-card">
+  <view class="form-cell form-cell-textarea">
+    <view class="form-cell-label">备注</view>
+    <textarea placeholder="其他备注（可选）" placeholder-class="placeholder" value="{{form.remark}}" bindinput="onRemarkInput" maxlength="500" />
+  </view>
+</view>
+
+<button class="btn-primary" bindtap="onSubmit">保存</button>

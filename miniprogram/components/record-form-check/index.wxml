@@ -1,27 +1,29 @@
-<view class="form-body">
-  <view class="form-group">
-    <text class="form-label">检查类型 <text class="required">*</text></text>
-    <picker bindchange="onTypeChange" value="{{checkOptions.indexOf(form.checkType)}}" range="{{checkOptions}}">
-      <view class="picker-value">{{form.checkType}}</view>
-    </picker>
-  </view>
+<view class="form-card">
+  <picker bindchange="onTypeChange" value="{{checkOptions.indexOf(form.checkType)}}" range="{{checkOptions}}">
+    <view class="form-cell form-cell-arrow">
+      <text class="form-cell-label">检查类型 <text class="required">*</text></text>
+      <text class="form-cell-value">{{form.checkType}}</text>
+    </view>
+  </picker>
 
-  <view class="form-group">
-    <text class="form-label">日期 <text class="required">*</text></text>
-    <picker mode="date" bindchange="onDateChange" value="{{form.date}}" end="{{today}}">
-      <view class="picker-value">{{form.date}}</view>
-    </picker>
-  </view>
+  <picker mode="date" bindchange="onDateChange" value="{{form.date}}" end="{{today}}">
+    <view class="form-cell form-cell-arrow">
+      <text class="form-cell-label">日期 <text class="required">*</text></text>
+      <text class="form-cell-value {{form.date ? '' : 'placeholder'}}">{{form.date || '请选择日期'}}</text>
+    </view>
+  </picker>
 
-  <view class="form-group">
-    <text class="form-label">医院</text>
-    <input class="form-input" placeholder="请输入医院（可选）" value="{{form.hospital}}" bindinput="onHospitalInput" />
+  <view class="form-cell">
+    <text class="form-cell-label">医院</text>
+    <input class="form-cell-input" placeholder="可选" placeholder-class="placeholder" value="{{form.hospital}}" bindinput="onHospitalInput" />
   </view>
-
-  <view class="form-group">
-    <text class="form-label">结果/备注</text>
-    <textarea class="form-textarea" placeholder="请输入检查结果或备注（可选）" value="{{form.remark}}" bindinput="onRemarkInput" maxlength="500" />
-  </view>
-
-  <button class="btn-primary" bindtap="onSubmit">保存</button>
 </view>
+
+<view class="form-card">
+  <view class="form-cell form-cell-textarea">
+    <view class="form-cell-label">结果 / 备注</view>
+    <textarea placeholder="请输入检查结果或备注（可选）" placeholder-class="placeholder" value="{{form.remark}}" bindinput="onRemarkInput" maxlength="500" />
+  </view>
+</view>
+
+<button class="btn-primary" bindtap="onSubmit">保存</button>
