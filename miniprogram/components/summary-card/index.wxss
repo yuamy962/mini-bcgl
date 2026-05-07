@@ -1,0 +1,50 @@
+.summary-card-content {
+  padding: 10rpx 0;
+}
+
+.summary-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 14rpx 0;
+  border-bottom: 1rpx solid var(--border);
+}
+
+.summary-item:last-child {
+  border-bottom: none;
+}
+
+.item-marker {
+  width: 8rpx;
+  height: 8rpx;
+  background: var(--primary);
+  border-radius: 50%;
+  margin-right: 16rpx;
+  margin-top: 14rpx;
+  flex-shrink: 0;
+}
+
+.item-marker.down {
+  background: var(--success);
+}
+
+.item-marker.up {
+  background: var(--danger);
+}
+
+.item-text {
+  font-size: 28rpx;
+  color: var(--text-main);
+  line-height: 1.5;
+  flex: 1;
+  word-break: break-all;
+}
+
+.summary-empty {
+  padding: 30rpx 0;
+  text-align: center;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: var(--text-tertiary);
+}

@@ -1,14 +1,46 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/example/index"
+    "pages/home/index",
+    "pages/timeline/index",
+    "pages/trend/index",
+    "pages/reminder/index",
+    "pages/record/index",
+    "pages/timeline/detail",
+    "pages/summary/index",
+    "pages/family/index",
+    "pages/profile/create",
+    "pages/profile/edit"
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
+    "backgroundColor": "#F5F7FA",
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "病程管家",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#2B6AFF",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/timeline/index",
+        "text": "时间轴"
+      },
+      {
+        "pagePath": "pages/trend/index",
+        "text": "趋势"
+      },
+      {
+        "pagePath": "pages/reminder/index",
+        "text": "提醒"
+      }
+    ]
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2",

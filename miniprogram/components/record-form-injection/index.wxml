@@ -1,0 +1,34 @@
+<view class="form-body">
+  <view class="form-group">
+    <text class="form-label">药物名称 <text class="required">*</text></text>
+    <picker bindchange="onDrugChange" value="{{drugOptions.indexOf(form.drug)}}" range="{{drugOptions}}">
+      <view class="picker-value">{{form.drug}}</view>
+    </picker>
+  </view>
+
+  <view class="form-group">
+    <text class="form-label">注射日期 <text class="required">*</text></text>
+    <picker mode="date" bindchange="onDateChange" value="{{form.date}}" end="{{today}}">
+      <view class="picker-value">{{form.date}}</view>
+    </picker>
+  </view>
+
+  <view class="form-group">
+    <text class="form-label">注射周期 <text class="required">*</text></text>
+    <picker bindchange="onCycleChange" value="{{cycleIndex}}" range="{{cycleOptions}}" range-key="label">
+      <view class="picker-value">{{cycleOptions[cycleIndex].label}}</view>
+    </picker>
+  </view>
+
+  <view class="form-group">
+    <text class="form-label">下次注射日期</text>
+    <view class="picker-value" style="color: var(--primary); font-weight: 500;">{{form.nextDate}}</view>
+  </view>
+
+  <view class="form-group">
+    <text class="form-label">医院</text>
+    <input class="form-input" placeholder="请输入医院（可选）" value="{{form.hospital}}" bindinput="onHospitalInput" />
+  </view>
+
+  <button class="btn-primary" bindtap="onSubmit">保存</button>
+</view>

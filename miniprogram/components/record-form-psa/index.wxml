@@ -1,0 +1,27 @@
+<view class="form-body">
+  <view class="form-group">
+    <text class="form-label">指标类型 <text class="required">*</text></text>
+    <picker bindchange="onTypeChange" value="{{indicatorOptions.indexOf(form.indicatorType)}}" range="{{indicatorOptions}}">
+      <view class="picker-value">{{form.indicatorType}}</view>
+    </picker>
+  </view>
+
+  <view class="form-group">
+    <text class="form-label">数值 <text class="required">*</text></text>
+    <input class="form-input" type="digit" placeholder="请输入数值" value="{{form.value}}" bindinput="onValueInput" />
+  </view>
+
+  <view class="form-group">
+    <text class="form-label">日期 <text class="required">*</text></text>
+    <picker mode="date" bindchange="onDateChange" value="{{form.date}}" end="{{today}}">
+      <view class="picker-value">{{form.date}}</view>
+    </picker>
+  </view>
+
+  <view class="form-group">
+    <text class="form-label">医院</text>
+    <input class="form-input" placeholder="请输入医院（可选）" value="{{form.hospital}}" bindinput="onHospitalInput" />
+  </view>
+
+  <button class="btn-primary" bindtap="onSubmit">保存</button>
+</view>

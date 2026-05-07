@@ -1,0 +1,15 @@
+<view class="form-body">
+  <view class="form-group">
+    <text class="form-label">日期 <text class="required">*</text></text>
+    <picker mode="date" bindchange="onDateChange" value="{{form.date}}" end="{{today}}">
+      <view class="picker-value">{{form.date}}</view>
+    </picker>
+  </view>
+
+  <view class="form-group">
+    <text class="form-label">备注内容 <text class="required">*</text></text>
+    <textarea class="form-textarea" placeholder="请输入备注内容，例如：最近腰疼、排尿困难、状态较好等" value="{{form.content}}" bindinput="onContentInput" maxlength="500" />
+  </view>
+
+  <button class="btn-primary" bindtap="onSubmit">保存</button>
+</view>

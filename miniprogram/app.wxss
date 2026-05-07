@@ -1,27 +1,131 @@
 /**app.wxss**/
+page {
+  --primary: #2B6AFF;
+  --primary-light: #E8F0FE;
+  --primary-bg: #F0F5FF;
+  --success: #52C41A;
+  --success-bg: #F6FFED;
+  --warning: #FAAD14;
+  --warning-bg: #FFFBE6;
+  --danger: #FF4D4F;
+  --danger-bg: #FFF1F0;
+  --text-main: #333333;
+  --text-secondary: #666666;
+  --text-tertiary: #999999;
+  --border: #EEEEEE;
+  --bg: #F5F7FA;
+  --white: #FFFFFF;
+  --radius: 16rpx;
+
+  background: var(--bg);
+  color: var(--text-main);
+  font-size: 28rpx;
+  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 30rpx;
   box-sizing: border-box;
-} 
-
-button {
-  background: initial;
 }
 
-button:focus{
-  outline: 0;
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
 }
 
-button::after{
+.btn-primary {
+  background: var(--primary);
+  color: var(--white);
+  border-radius: 44rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 32rpx;
+  text-align: center;
+  border: none;
+  margin-top: 40rpx;
+}
+
+.btn-primary::after {
   border: none;
 }
 
+.btn-primary[disabled] {
+  opacity: 0.6;
+}
 
-page {
-  background: #f6f6f6;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 20rpx;
+}
+
+.form-group {
+  margin-bottom: 30rpx;
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  color: var(--text-main);
+  margin-bottom: 12rpx;
+  font-weight: 500;
+}
+
+.form-label .required {
+  color: var(--danger);
+  margin-left: 4rpx;
+}
+
+.form-input {
+  width: 100%;
+  height: 80rpx;
+  background: var(--bg);
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  color: var(--text-main);
+  border: 2rpx solid transparent;
+}
+
+.form-input:focus {
+  border-color: var(--primary);
+}
+
+.picker-value {
+  width: 100%;
+  height: 80rpx;
+  background: var(--bg);
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  color: var(--text-main);
+  line-height: 80rpx;
+}
+
+.picker-value.placeholder {
+  color: var(--text-tertiary);
+}
+
+.form-textarea {
+  width: 100%;
+  height: 160rpx;
+  background: var(--bg);
+  border-radius: 12rpx;
+  padding: 20rpx 24rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  color: var(--text-main);
+  border: 2rpx solid transparent;
+}
+
+.safe-area-bottom {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
 }

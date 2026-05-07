@@ -1,0 +1,54 @@
+.status-card-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10rpx 0;
+}
+
+.status-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.status-label {
+  font-size: 24rpx;
+  color: var(--text-tertiary);
+  margin-bottom: 12rpx;
+}
+
+.status-value {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.status-value.empty {
+  color: var(--text-tertiary);
+  font-weight: 400;
+}
+
+.status-unit {
+  font-size: 22rpx;
+  color: var(--text-tertiary);
+  margin-top: 4rpx;
+}
+
+.status-value.down {
+  color: var(--success);
+}
+
+.status-value.up {
+  color: var(--danger);
+}
+
+.status-value.stable {
+  color: var(--warning);
+}
+
+.status-divider {
+  width: 1rpx;
+  height: 60rpx;
+  background: var(--border);
+}

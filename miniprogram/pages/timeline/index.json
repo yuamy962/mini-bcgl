@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "病程时间轴",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "timeline-card": "../../components/timeline-card/index",
+    "timeline-date-divider": "../../components/timeline-date-divider/index",
+    "empty-state": "../../components/empty-state/index",
+    "loading-state": "../../components/loading-state/index"
+  }
+}

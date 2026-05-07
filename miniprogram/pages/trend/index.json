@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "趋势分析",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "trend-chart": "../../components/trend-chart/index",
+    "loading-state": "../../components/loading-state/index"
+  }
+}

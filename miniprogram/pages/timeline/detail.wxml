@@ -1,0 +1,64 @@
+<view class="container" wx:if="{{!loading && detail}}">
+  <view class="detail-header">
+    <view class="detail-icon">{{detail.icon || '📝'}}</view>
+    <view class="detail-title">{{detail.title}}</view>
+    <view class="detail-type">{{detail.typeName}}</view>
+  </view>
+
+  <view class="card detail-card">
+    <view class="detail-row" wx:if="{{detail.date}}">
+      <text class="detail-label">日期</text>
+      <text class="detail-value">{{detail.date}}</text>
+    </view>
+    <view class="detail-row" wx:if="{{detail.indicatorType}}">
+      <text class="detail-label">指标类型</text>
+      <text class="detail-value">{{detail.indicatorType}}</text>
+    </view>
+    <view class="detail-row" wx:if="{{detail.value !== undefined && detail.value !== ''}}">
+      <text class="detail-label">数值</text>
+      <text class="detail-value">{{detail.value}} {{detail.unit || ''}}</text>
+    </view>
+    <view class="detail-row" wx:if="{{detail.checkType}}">
+      <text class="detail-label">检查类型</text>
+      <text class="detail-value">{{detail.checkType}}</text>
+    </view>
+    <view class="detail-row" wx:if="{{detail.drug}}">
+      <text class="detail-label">药物</text>
+      <text class="detail-value">{{detail.drug}}</text>
+    </view>
+    <view class="detail-row" wx:if="{{detail.hospital}}">
+      <text class="detail-label">医院</text>
+      <text class="detail-value">{{detail.hospital}}</text>
+    </view>
+    <view class="detail-row" wx:if="{{detail.doctorAdvice}}">
+      <text class="detail-label">医生建议</text>
+      <text class="detail-value">{{detail.doctorAdvice}}</text>
+    </view>
+    <view class="detail-row" wx:if="{{detail.followUp}}">
+      <text class="detail-label">后续方案</text>
+      <text class="detail-value">{{detail.followUp}}</text>
+    </view>
+    <view class="detail-row" wx:if="{{detail.remark || detail.content}}">
+      <text class="detail-label">备注</text>
+      <text class="detail-value">{{detail.remark || detail.content}}</text>
+    </view>
+    <view class="detail-row" wx:if="{{detail.nextDate}}">
+      <text class="detail-label">下次日期</text>
+      <text class="detail-value" style="color: var(--primary);">{{detail.nextDate}}</text>
+    </view>
+  </view>
+
+  <!-- 图片展示 -->
+  <view class="card image-card" wx:if="{{detail.images && detail.images.length > 0}}">
+    <view class="detail-label">检查图片</view>
+    <view class="image-list">
+      <image wx:for="{{detail.images}}" wx:key="*this" src="{{item}}" mode="aspectFill" class="detail-image" data-url="{{item}}" bindtap="onPreviewImage" />
+    </view>
+  </view>
+
+  <view class="detail-footer">
+    <text class="create-time">创建于 {{detail.createTimeStr}}</text>
+  </view>
+
+  <button class="btn-delete" bindtap="onDelete">删除记录</button>
+</view>

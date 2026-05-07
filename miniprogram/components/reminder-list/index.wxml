@@ -1,0 +1,14 @@
+<view class="reminder-list-content">
+  <block wx:if="{{reminders.length > 0}}">
+    <view class="reminder-item" wx:for="{{reminders}}" wx:key="_id">
+      <view class="reminder-dot"></view>
+      <view class="reminder-info">
+        <text class="reminder-title">{{item.title}}</text>
+        <text class="reminder-date">{{item.nextDate}}</text>
+      </view>
+    </view>
+  </block>
+  <view class="reminder-empty" wx:else>
+    <text class="empty-text">暂无即将到期提醒</text>
+  </view>
+</view>

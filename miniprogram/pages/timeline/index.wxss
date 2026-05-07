@@ -1,0 +1,29 @@
+.timeline-container {
+  padding-bottom: 140rpx;
+}
+
+.timeline-list {
+  padding: 0 30rpx;
+}
+
+.float-add-btn {
+  position: fixed;
+  bottom: 80rpx;
+  right: 40rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 20rpx rgba(43, 106, 255, 0.35);
+  z-index: 100;
+}
+
+.add-icon {
+  color: var(--white);
+  font-size: 56rpx;
+  font-weight: 300;
+  line-height: 100rpx;
+}

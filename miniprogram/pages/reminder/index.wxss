@@ -1,0 +1,142 @@
+.reminder-container {
+  padding-bottom: 140rpx;
+}
+
+.reminder-list {
+  padding: 0 30rpx;
+}
+
+.reminder-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.03);
+}
+
+.reminder-card.inactive {
+  opacity: 0.6;
+}
+
+.reminder-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.reminder-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+
+.reminder-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: var(--text-main);
+  margin-right: 12rpx;
+}
+
+.reminder-type-tag {
+  font-size: 20rpx;
+  color: var(--primary);
+  background: var(--primary-bg);
+  padding: 2rpx 10rpx;
+  border-radius: 6rpx;
+}
+
+.reminder-body {
+  display: flex;
+  align-items: center;
+}
+
+.reminder-date {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  margin-right: 16rpx;
+}
+
+.reminder-cycle {
+  font-size: 22rpx;
+  color: var(--text-tertiary);
+  background: var(--bg);
+  padding: 2rpx 10rpx;
+  border-radius: 6rpx;
+}
+
+.reminder-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: 20rpx;
+}
+
+.action-delete {
+  font-size: 24rpx;
+  color: var(--danger);
+  margin-top: 10rpx;
+  padding: 4rpx 10rpx;
+}
+
+.form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.form-panel {
+  background: var(--white);
+  border-radius: 32rpx 32rpx 0 0;
+  padding: 30rpx;
+  padding-bottom: calc(30rpx + env(safe-area-inset-bottom));
+}
+
+.form-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.form-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.form-close {
+  font-size: 36rpx;
+  color: var(--text-tertiary);
+  padding: 10rpx;
+}
+
+.float-add-btn {
+  position: fixed;
+  bottom: 80rpx;
+  right: 40rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 20rpx rgba(43, 106, 255, 0.35);
+  z-index: 100;
+}
+
+.add-icon {
+  color: var(--white);
+  font-size: 56rpx;
+  font-weight: 300;
+  line-height: 100rpx;
+}

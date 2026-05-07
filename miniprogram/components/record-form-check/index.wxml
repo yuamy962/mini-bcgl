@@ -1,0 +1,27 @@
+<view class="form-body">
+  <view class="form-group">
+    <text class="form-label">检查类型 <text class="required">*</text></text>
+    <picker bindchange="onTypeChange" value="{{checkOptions.indexOf(form.checkType)}}" range="{{checkOptions}}">
+      <view class="picker-value">{{form.checkType}}</view>
+    </picker>
+  </view>
+
+  <view class="form-group">
+    <text class="form-label">日期 <text class="required">*</text></text>
+    <picker mode="date" bindchange="onDateChange" value="{{form.date}}" end="{{today}}">
+      <view class="picker-value">{{form.date}}</view>
+    </picker>
+  </view>
+
+  <view class="form-group">
+    <text class="form-label">医院</text>
+    <input class="form-input" placeholder="请输入医院（可选）" value="{{form.hospital}}" bindinput="onHospitalInput" />
+  </view>
+
+  <view class="form-group">
+    <text class="form-label">结果/备注</text>
+    <textarea class="form-textarea" placeholder="请输入检查结果或备注（可选）" value="{{form.remark}}" bindinput="onRemarkInput" maxlength="500" />
+  </view>
+
+  <button class="btn-primary" bindtap="onSubmit">保存</button>
+</view>

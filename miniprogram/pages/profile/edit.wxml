@@ -1,0 +1,65 @@
+<view class="container">
+  <view class="section-title">编辑患者档案</view>
+
+  <!-- 姓名 -->
+  <view class="form-group">
+    <text class="form-label">患者姓名 <text class="required">*</text></text>
+    <input class="form-input" placeholder="请输入患者姓名" value="{{form.name}}" bindinput="onNameInput" maxlength="20" />
+  </view>
+
+  <!-- 年龄 -->
+  <view class="form-group">
+    <text class="form-label">年龄 <text class="required">*</text></text>
+    <input class="form-input" type="number" placeholder="请输入年龄" value="{{form.age}}" bindinput="onAgeInput" />
+  </view>
+
+  <!-- 性别 -->
+  <view class="form-group">
+    <text class="form-label">性别 <text class="required">*</text></text>
+    <picker bindchange="onGenderChange" value="{{genderOptions.indexOf(form.gender)}}" range="{{genderOptions}}">
+      <view class="picker-value">{{form.gender}}</view>
+    </picker>
+  </view>
+
+  <!-- 癌种 -->
+  <view class="form-group">
+    <text class="form-label">癌种 <text class="required">*</text></text>
+    <picker bindchange="onCancerChange" value="{{cancerOptions.indexOf(form.cancerType)}}" range="{{cancerOptions}}">
+      <view class="picker-value">{{form.cancerType}}</view>
+    </picker>
+  </view>
+
+  <!-- 确诊时间 -->
+  <view class="form-group">
+    <text class="form-label">确诊时间 <text class="required">*</text></text>
+    <picker mode="date" bindchange="onDateChange" value="{{form.diagnosisDate}}" end="{{today}}">
+      <view class="picker-value {{form.diagnosisDate ? '' : 'placeholder'}}">
+        {{form.diagnosisDate || '请选择确诊时间'}}
+      </view>
+    </picker>
+  </view>
+
+  <!-- 当前治疗状态 -->
+  <view class="form-group">
+    <text class="form-label">当前治疗状态</text>
+    <picker bindchange="onStatusChange" value="{{statusOptions.indexOf(form.treatmentStatus)}}" range="{{statusOptions}}">
+      <view class="picker-value {{form.treatmentStatus ? '' : 'placeholder'}}">
+        {{form.treatmentStatus || '请选择治疗状态'}}
+      </view>
+    </picker>
+  </view>
+
+  <!-- 当前医院 -->
+  <view class="form-group">
+    <text class="form-label">当前医院</text>
+    <input class="form-input" placeholder="请输入医院名称（可选）" value="{{form.hospital}}" bindinput="onHospitalInput" />
+  </view>
+
+  <!-- 主治医生 -->
+  <view class="form-group">
+    <text class="form-label">主治医生</text>
+    <input class="form-input" placeholder="请输入主治医生姓名（可选）" value="{{form.doctor}}" bindinput="onDoctorInput" />
+  </view>
+
+  <button class="btn-primary" bindtap="onSubmit">保存修改</button>
+</view>

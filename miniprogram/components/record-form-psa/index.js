@@ -1,0 +1,51 @@
+const { formatDate } = require('../../utils/util.js');
+
+Component({
+  data: {
+    form: {
+      indicatorType: 'TPSA',
+      value: '',
+      date: '',
+      hospital: '',
+    },
+    indicatorOptions: ['TPSA', 'FPSA'],
+    today: '',
+  },
+
+  lifetimes: {
+    attached() {
+      const today = formatDate(new Date());
+      this.setData({ today, 'form.date': today });
+    },
+  },
+
+  methods: {
+    onTypeChange(e) {
+      const index = parseInt(e.detail.value);
+      this.setData({ 'form.indicatorType': this.data.indicatorOptions[index] });
+    },
+    onValueInput(e) {
+      this.setData({ 'form.value': e.detail.value });
+    },
+    onDateChange(e) {
+      this.setData({ 'form.date': e.detail.value });
+    },
+    onHospitalInput(e) {
+      this.setData({ 'form.hospital': e.detail.value });
+    },
+    onSubmit() {
+      const { form } = this.data;
+      if (!form.value || isNaN(Number(form.value))) {
+        wx.showToast({ title: '请输入有效的数值', icon: 'none' });
+        return;
+      }
+      this.triggerEvent('submit', {
+        data: {
+          ...form,
+          value: Number(form.value),
+          unit: 'ng/mL',
+        },
+      });
+    },
+  },
+});

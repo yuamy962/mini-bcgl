@@ -1,0 +1,45 @@
+<view class="container family-container">
+  <loading-state wx:if="{{loading}}" />
+
+  <block wx:if="{{!loading}}">
+    <!-- 当前成员 -->
+    <view class="section-title">当前成员</view>
+    <view class="card member-card" wx:if="{{members.length > 0}}">
+      <view class="member-item" wx:for="{{members}}" wx:key="_id">
+        <view class="member-avatar">{{item.role === 'admin' || item.memberOpenid === patientId ? '👤' : '👥'}}</view>
+        <view class="member-info">
+          <text class="member-name">{{item.nickName || '家庭成员'}}</text>
+          <text class="member-role">{{item.memberOpenid === patientId ? '管理员' : '成员'}} · {{item.permission === 'edit' ? '可编辑' : '仅查看'}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="card" wx:if="{{members.length === 0}}">
+      <text class="empty-text">暂无家庭成员</text>
+    </view>
+
+    <!-- 邀请按钮 -->
+    <button class="btn-primary" open-type="share" wx:if="{{isMainUser}}">邀请家人</button>
+    <button class="btn-delete" bindtap="onLeaveFamily" wx:if="{{!isMainUser}}">退出家庭</button>
+
+    <!-- 操作记录 -->
+    <view class="section-title" wx:if="{{operations.length > 0}}">操作记录</view>
+    <view class="operation-list" wx:if="{{operations.length > 0}}">
+      <view class="operation-item" wx:for="{{operations}}" wx:key="_id">
+        <text class="op-text">{{item.operatorName}} {{item.content}}</text>
+        <text class="op-time">{{item.timeStr}}</text>
+      </view>
+    </view>
+  </block>
+
+  <!-- 分享引导弹层 -->
+  <view class="share-overlay" wx:if="{{showShareTip}}" bindtap="closeShareTip">
+    <view class="share-tip-panel" catchtap="preventClose">
+      <view class="share-tip-title">邀请家人</view>
+      <view class="share-tip-content">
+        <text>请点击右上角「···」按钮，选择「转发」发送给微信好友。</text>
+      </view>
+      <button class="btn-primary" open-type="share">去分享</button>
+      <view class="share-tip-close" bindtap="closeShareTip">关闭</view>
+    </view>
+  </view>
+</view>

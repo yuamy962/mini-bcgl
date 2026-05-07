@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "家庭协同",
+  "usingComponents": {
+    "empty-state": "../../components/empty-state/index",
+    "loading-state": "../../components/loading-state/index"
+  }
+}

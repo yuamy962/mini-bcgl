@@ -1,0 +1,5 @@
+<view class="date-divider">
+  <view class="divider-line"></view>
+  <view class="divider-date">{{date}}</view>
+  <view class="divider-line"></view>
+</view>

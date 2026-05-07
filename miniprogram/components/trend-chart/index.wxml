@@ -1,0 +1,7 @@
+<view class="trend-chart-wrap">
+  <canvas
+    canvas-id="trendCanvas"
+    class="chart-canvas"
+    style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;"
+  ></canvas>
+</view>

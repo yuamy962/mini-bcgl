@@ -1,0 +1,42 @@
+<view class="container trend-container">
+  <!-- 免责声明 -->
+  <view class="disclaimer-bar" wx:if="{{!disclaimerAccepted}}">
+    <text class="disclaimer-text">⚠️ 本产品仅用于病程记录与整理，不提供医疗诊断建议</text>
+    <text class="disclaimer-btn" bindtap="onAcceptDisclaimer">知道了</text>
+  </view>
+
+  <view class="section-title">PSA 趋势分析</view>
+
+  <!-- 范围切换 -->
+  <view class="range-tabs">
+    <view class="range-tab {{currentRange === item.value ? 'active' : ''}}" wx:for="{{rangeOptions}}" wx:key="value" data-index="{{index}}" bindtap="onRangeChange">
+      {{item.label}}
+    </view>
+  </view>
+
+  <!-- 图表 -->
+  <view class="card chart-card" wx:if="{{!loading && filteredList.length > 0}}">
+    <trend-chart data="{{filteredList}}" />
+  </view>
+
+  <view class="card chart-empty" wx:if="{{!loading && filteredList.length === 0}}">
+    <text class="empty-text">暂无 PSA 记录，请在首页添加</text>
+  </view>
+
+  <loading-state wx:if="{{loading}}" />
+
+  <!-- 风险提示 -->
+  <view class="risk-bar {{riskInfo.level}}" wx:if="{{!loading && riskInfo}}">
+    <text class="risk-text">{{riskInfo.text}}</text>
+  </view>
+
+  <!-- 最近记录列表 -->
+  <view class="section-title" wx:if="{{!loading && filteredList.length > 0}}">最近记录</view>
+  <view class="record-list" wx:if="{{!loading && filteredList.length > 0}}">
+    <view class="record-item" wx:for="{{filteredList}}" wx:key="_id">
+      <text class="record-date">{{item.date}}</text>
+      <text class="record-value">{{item.value}} ng/mL</text>
+      <text class="record-hospital" wx:if="{{item.hospital}}">{{item.hospital}}</text>
+    </view>
+  </view>
+</view>

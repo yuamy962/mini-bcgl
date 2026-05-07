@@ -1,0 +1,99 @@
+.home-container {
+  padding-bottom: 140rpx;
+}
+
+.patient-header {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  background: var(--white);
+  margin-bottom: 20rpx;
+}
+
+.patient-name {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-right: 16rpx;
+}
+
+.patient-tag {
+  font-size: 22rpx;
+  color: var(--primary);
+  background: var(--primary-bg);
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  margin-right: 12rpx;
+}
+
+.patient-status {
+  font-size: 22rpx;
+  color: var(--success);
+  background: var(--success-bg);
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+}
+
+.summary-wrap {
+  position: relative;
+}
+
+.summary-more {
+  text-align: right;
+  margin-top: 16rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid var(--border);
+}
+
+.more-text {
+  font-size: 26rpx;
+  color: var(--primary);
+}
+
+.quick-actions {
+  display: flex;
+  justify-content: space-between;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.action-icon {
+  font-size: 48rpx;
+  margin-bottom: 12rpx;
+}
+
+.action-text {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+
+.float-add-btn {
+  position: fixed;
+  bottom: 180rpx;
+  right: 40rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 20rpx rgba(43, 106, 255, 0.35);
+  z-index: 100;
+}
+
+.add-icon {
+  color: var(--white);
+  font-size: 56rpx;
+  font-weight: 300;
+  line-height: 100rpx;
+}

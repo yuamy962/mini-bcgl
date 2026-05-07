@@ -1,0 +1,26 @@
+.create-page {
+  min-height: 100vh;
+  background: var(--white);
+  padding-bottom: 60rpx;
+}
+
+.create-header {
+  padding: 60rpx 40rpx 40rpx;
+  background: linear-gradient(180deg, var(--primary-bg) 0%, var(--white) 100%);
+}
+
+.create-title {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 12rpx;
+}
+
+.create-subtitle {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+}
+
+.create-form {
+  padding: 20rpx 40rpx;
+}

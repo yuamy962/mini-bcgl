@@ -1,0 +1,30 @@
+<view class="form-body">
+  <view class="form-group">
+    <text class="form-label">医院</text>
+    <input class="form-input" placeholder="请输入医院（可选）" value="{{form.hospital}}" bindinput="onHospitalInput" />
+  </view>
+
+  <view class="form-group">
+    <text class="form-label">复诊日期 <text class="required">*</text></text>
+    <picker mode="date" bindchange="onDateChange" value="{{form.date}}" end="{{today}}">
+      <view class="picker-value">{{form.date}}</view>
+    </picker>
+  </view>
+
+  <view class="form-group">
+    <text class="form-label">医生建议 <text class="required">*</text></text>
+    <textarea class="form-textarea" placeholder="请输入医生建议" value="{{form.doctorAdvice}}" bindinput="onAdviceInput" maxlength="1000" />
+  </view>
+
+  <view class="form-group">
+    <text class="form-label">后续方案</text>
+    <textarea class="form-textarea" placeholder="请输入后续治疗方案（可选）" value="{{form.followUp}}" bindinput="onFollowUpInput" maxlength="1000" />
+  </view>
+
+  <view class="form-group">
+    <text class="form-label">备注</text>
+    <textarea class="form-textarea" placeholder="其他备注（可选）" value="{{form.remark}}" bindinput="onRemarkInput" maxlength="500" />
+  </view>
+
+  <button class="btn-primary" bindtap="onSubmit">保存</button>
+</view>

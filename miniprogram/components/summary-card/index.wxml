@@ -1,0 +1,31 @@
+<view class="summary-card-content">
+  <block wx:if="{{summary}}">
+    <!-- PSA 变化 -->
+    <view class="summary-item" wx:if="{{summary.psaChange}}">
+      <view class="item-marker {{summary.psaChange.direction}}"></view>
+      <text class="item-text">PSA：{{summary.psaChange.from}} → {{summary.psaChange.to}}</text>
+    </view>
+
+    <!-- 最近治疗 -->
+    <view class="summary-item" wx:if="{{summary.recentTreatment}}">
+      <view class="item-marker"></view>
+      <text class="item-text">{{summary.recentTreatment.date}} {{summary.recentTreatment.title}}</text>
+    </view>
+
+    <!-- 最近检查 -->
+    <view class="summary-item" wx:if="{{summary.recentCheck}}">
+      <view class="item-marker"></view>
+      <text class="item-text">{{summary.recentCheck.title}} {{summary.recentCheck.remark ? '：' + summary.recentCheck.remark : ''}}</text>
+    </view>
+
+    <!-- 医生建议 -->
+    <view class="summary-item" wx:if="{{summary.doctorAdvice}}">
+      <view class="item-marker"></view>
+      <text class="item-text">医生建议：{{summary.doctorAdvice.doctorAdvice}}</text>
+    </view>
+  </block>
+
+  <view class="summary-empty" wx:if="{{!summary || (!summary.psaChange && !summary.recentTreatment && !summary.recentCheck && !summary.doctorAdvice)}}">
+    <text class="empty-text">暂无记录，添加第一条病程后自动生成摘要</text>
+  </view>
+</view>

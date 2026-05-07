@@ -1,0 +1,22 @@
+<view class="form-body">
+  <view class="form-group">
+    <text class="form-label">药物名称 <text class="required">*</text></text>
+    <input class="form-input" placeholder="请输入药物名称" value="{{form.drug}}" bindinput="onDrugInput" />
+  </view>
+
+  <view class="form-group">
+    <text class="form-label">开始时间 <text class="required">*</text></text>
+    <picker mode="date" bindchange="onStartDateChange" value="{{form.startDate}}" end="{{today}}">
+      <view class="picker-value">{{form.startDate}}</view>
+    </picker>
+  </view>
+
+  <view class="form-group">
+    <text class="form-label">下次拿药时间</text>
+    <picker mode="date" bindchange="onNextDateChange" value="{{form.nextDate}}">
+      <view class="picker-value {{form.nextDate ? '' : 'placeholder'}}">{{form.nextDate || '请选择下次拿药时间'}}</view>
+    </picker>
+  </view>
+
+  <button class="btn-primary" bindtap="onSubmit">保存</button>
+</view>

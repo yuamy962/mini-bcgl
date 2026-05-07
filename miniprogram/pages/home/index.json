@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "病程管家",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "status-card": "../../components/status-card/index",
+    "reminder-list": "../../components/reminder-list/index",
+    "summary-card": "../../components/summary-card/index",
+    "empty-state": "../../components/empty-state/index",
+    "loading-state": "../../components/loading-state/index"
+  }
+}

@@ -1,0 +1,20 @@
+<view class="status-card-content">
+  <view class="status-item">
+    <text class="status-label">最近TPSA</text>
+    <block wx:if="{{latestPsa}}">
+      <text class="status-value">{{latestPsa.value}}</text>
+      <text class="status-unit">{{latestPsa.unit || 'ng/mL'}}</text>
+    </block>
+    <text wx:else class="status-value empty">--</text>
+  </view>
+  <view class="status-divider"></view>
+  <view class="status-item">
+    <text class="status-label">趋势</text>
+    <text class="status-value {{psaTrend.direction}}">{{psaTrend.text}}</text>
+  </view>
+  <view class="status-divider"></view>
+  <view class="status-item">
+    <text class="status-label">当前状态</text>
+    <text class="status-value">{{treatmentStatus || '未设置'}}</text>
+  </view>
+</view>

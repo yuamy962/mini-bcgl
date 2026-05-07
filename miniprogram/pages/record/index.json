@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "添加记录",
+  "usingComponents": {
+    "record-form-psa": "../../components/record-form-psa/index",
+    "record-form-check": "../../components/record-form-check/index",
+    "record-form-injection": "../../components/record-form-injection/index",
+    "record-form-medicine": "../../components/record-form-medicine/index",
+    "record-form-visit": "../../components/record-form-visit/index",
+    "record-form-note": "../../components/record-form-note/index"
+  }
+}

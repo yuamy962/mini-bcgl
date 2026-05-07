@@ -1,0 +1,9 @@
+{
+  "name": "getSummary",
+  "version": "1.0.0",
+  "description": "生成病程摘要",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}

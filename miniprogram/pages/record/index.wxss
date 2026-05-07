@@ -1,0 +1,83 @@
+.record-page {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.record-sheet {
+  background: var(--white);
+  border-radius: 32rpx 32rpx 0 0;
+  padding: 40rpx 30rpx;
+  padding-bottom: calc(40rpx + env(safe-area-inset-bottom));
+  margin-top: 20vh;
+  min-height: 80vh;
+}
+
+.record-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--text-main);
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.record-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.record-type-item {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30rpx 0;
+  margin-bottom: 20rpx;
+  background: var(--bg);
+  border-radius: 16rpx;
+}
+
+.type-icon {
+  font-size: 48rpx;
+  margin-bottom: 12rpx;
+}
+
+.type-label {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+.record-close {
+  margin-top: 20rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: var(--text-tertiary);
+  padding: 20rpx 0;
+}
+
+.record-form-area {
+  padding: 30rpx;
+  padding-bottom: calc(30rpx + env(safe-area-inset-bottom));
+}
+
+.form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30rpx;
+}
+
+.form-back {
+  font-size: 28rpx;
+  color: var(--primary);
+}
+
+.form-type-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.form-placeholder {
+  width: 80rpx;
+}

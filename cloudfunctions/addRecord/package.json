@@ -1,0 +1,9 @@
+{
+  "name": "addRecord",
+  "version": "1.0.0",
+  "description": "统一添加病程记录",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}

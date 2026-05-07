@@ -1,0 +1,77 @@
+.timeline-card {
+  display: flex;
+  align-items: flex-start;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.03);
+}
+
+.card-icon {
+  font-size: 40rpx;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+  width: 60rpx;
+  height: 60rpx;
+  background: var(--primary-bg);
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: var(--text-main);
+  margin-bottom: 8rpx;
+  word-break: break-all;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+
+.meta-type {
+  font-size: 22rpx;
+  color: var(--primary);
+  background: var(--primary-bg);
+  padding: 2rpx 10rpx;
+  border-radius: 6rpx;
+  margin-right: 12rpx;
+}
+
+.meta-date {
+  font-size: 22rpx;
+  color: var(--text-tertiary);
+}
+
+.card-extra {
+  margin-top: 6rpx;
+}
+
+.extra-value {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.extra-unit {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  margin-left: 6rpx;
+}
+
+.extra-text {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}

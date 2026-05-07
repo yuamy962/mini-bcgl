@@ -1,0 +1,51 @@
+.reminder-list-content {
+  padding: 10rpx 0;
+}
+
+.reminder-item {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid var(--border);
+}
+
+.reminder-item:last-child {
+  border-bottom: none;
+}
+
+.reminder-dot {
+  width: 16rpx;
+  height: 16rpx;
+  background: var(--warning);
+  border-radius: 50%;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.reminder-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+}
+
+.reminder-title {
+  font-size: 28rpx;
+  color: var(--text-main);
+}
+
+.reminder-date {
+  font-size: 26rpx;
+  color: var(--danger);
+  font-weight: 500;
+}
+
+.reminder-empty {
+  padding: 30rpx 0;
+  text-align: center;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: var(--text-tertiary);
+}

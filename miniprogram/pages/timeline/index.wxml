@@ -1,0 +1,18 @@
+<view class="container timeline-container">
+  <loading-state wx:if="{{loading}}" />
+
+  <empty-state wx:if="{{!loading && timelineGroups.length === 0}}" title="暂无病程记录" description="点击右下角添加第一条记录" btnText="添加记录" bind:btnTap="onAddRecord" />
+
+  <view class="timeline-list" wx:if="{{!loading && timelineGroups.length > 0}}">
+    <block wx:for="{{timelineGroups}}" wx:for-item="group" wx:key="date">
+      <timeline-date-divider date="{{group.date}}" />
+      <block wx:for="{{group.items}}" wx:for-item="item" wx:key="_id">
+        <timeline-card item="{{item}}" data-id="{{item._id}}" bindtap="goToDetail" />
+      </block>
+    </block>
+  </view>
+</view>
+
+<view class="float-add-btn" bindtap="onAddRecord">
+  <text class="add-icon">+</text>
+</view>

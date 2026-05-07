@@ -1,0 +1,65 @@
+<view class="container home-container">
+  <loading-state wx:if="{{loading}}" />
+
+  <!-- 顶部患者信息 -->
+  <view class="patient-header" bindtap="goToEditProfile" wx:if="{{hasProfile && patientInfo}}">
+    <text class="patient-name">{{patientInfo.name}}</text>
+    <text class="patient-tag" wx:if="{{patientInfo.cancerType}}">{{patientInfo.cancerType}}</text>
+    <text class="patient-status" wx:if="{{patientInfo.treatmentStatus}}">{{patientInfo.treatmentStatus}}</text>
+  </view>
+
+  <block wx:if="{{!loading && hasProfile && homeData}}">
+    <!-- 当前状态 -->
+    <view class="card">
+      <view class="section-title">当前状态</view>
+      <status-card
+        latestPsa="{{homeData.latestPsa}}"
+        psaTrend="{{homeData.psaTrend}}"
+        treatmentStatus="{{patientInfo.treatmentStatus}}"
+      />
+    </view>
+
+    <!-- 即将到期提醒 -->
+    <view class="card">
+      <view class="section-title">即将到期提醒</view>
+      <reminder-list reminders="{{homeData.upcomingReminders}}" />
+    </view>
+
+    <!-- 最近病程摘要 -->
+    <view class="card summary-wrap" bindtap="goToSummary">
+      <view class="section-title">最近病程摘要</view>
+      <summary-card summary="{{homeData.recentSummary}}" />
+      <view class="summary-more" wx:if="{{homeData.recentSummary && (homeData.recentSummary.psaChange || homeData.recentSummary.recentTreatment || homeData.recentSummary.recentCheck || homeData.recentSummary.doctorAdvice)}}">
+        <text class="more-text">查看完整摘要 →</text>
+      </view>
+    </view>
+
+    <!-- 快速功能入口 -->
+    <view class="quick-actions">
+      <view class="action-item" bindtap="goToTimeline">
+        <view class="action-icon">📋</view>
+        <text class="action-text">时间轴</text>
+      </view>
+      <view class="action-item" bindtap="goToTrend">
+        <view class="action-icon">📈</view>
+        <text class="action-text">趋势图</text>
+      </view>
+      <view class="action-item" bindtap="goToReminder">
+        <view class="action-icon">🔔</view>
+        <text class="action-text">提醒</text>
+      </view>
+      <view class="action-item" bindtap="goToFamily">
+        <view class="action-icon">👨‍👩‍👧</view>
+        <text class="action-text">家庭协同</text>
+      </view>
+    </view>
+  </block>
+
+  <!-- 无档案空状态 -->
+  <empty-state wx:if="{{!loading && !hasProfile}}" title="欢迎使用病程管家" description="请先创建患者档案，开始管理病程" btnText="创建档案" bind:btnTap="checkProfile" />
+</view>
+
+<!-- 底部固定添加按钮 -->
+<view class="float-add-btn" bindtap="onAddRecord" wx:if="{{hasProfile}}">
+  <text class="add-icon">+</text>
+</view>
