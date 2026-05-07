@@ -24,22 +24,36 @@ Component({
 
   methods: {
     initCanvas() {
-      const query = this.createSelectorQuery();
-      query.select('.trend-chart-wrap').boundingClientRect();
-      query.exec((res) => {
-        if (res && res[0] && res[0].width > 0) {
-          this.canvasWidth = res[0].width;
-          this.canvasHeight = res[0].height;
-          this.dpr = wx.getSystemInfoSync().pixelRatio;
-          this.canvasCtx = wx.createCanvasContext('trendCanvas', this);
+      const query = this.createSelectorQuery().in(this);
+      query.select('#trendCanvas')
+        .fields({ node: true, size: true })
+        .exec((res) => {
+          if (!res || !res[0] || !res[0].node) {
+            // 延迟重试
+            setTimeout(() => this.initCanvas(), 300);
+            return;
+          }
+          const canvas = res[0].node;
+          const ctx = canvas.getContext('2d');
+          const dpr = wx.getSystemInfoSync().pixelRatio;
+          const width = res[0].width;
+          const height = res[0].height;
+
+          canvas.width = width * dpr;
+          canvas.height = height * dpr;
+          ctx.scale(dpr, dpr);
+
+          this.canvas = canvas;
+          this.ctx = ctx;
+          this.canvasWidth = width;
+          this.canvasHeight = height;
           this._initPending = false;
           this.tryDraw();
-        }
-      });
+        });
     },
 
     tryDraw() {
-      if (this._initPending || !this.canvasCtx) return;
+      if (this._initPending || !this.ctx) return;
       if (this._pendingData && this._pendingData.length > 0) {
         this.drawChart(this._pendingData);
         this._pendingData = null;
@@ -47,84 +61,67 @@ Component({
     },
 
     drawChart(data) {
-      const ctx = this.canvasCtx;
-      const dpr = this.dpr || 1;
-      const width = this.canvasWidth;
-      const height = this.canvasHeight;
+      const ctx = this.ctx;
+      const w = this.canvasWidth;
+      const h = this.canvasHeight;
 
       if (!ctx || !data || data.length === 0) return;
 
-      ctx.scale(dpr, dpr);
-      const w = width / dpr;
-      const h = height / dpr;
+      ctx.clearRect(0, 0, w, h);
 
-      const padding = { top: 48, bottom: 44, left: 52, right: 28 };
+      const padding = { top: 50, bottom: 36, left: 20, right: 20 };
       const chartW = w - padding.left - padding.right;
       const chartH = h - padding.top - padding.bottom;
 
-      ctx.clearRect(0, 0, w, h);
-
       // 数值范围
       const values = data.map(d => Number(d.value));
-      let minVal = Math.min(...values);
-      let maxVal = Math.max(...values);
-      if (minVal === maxVal) {
-        minVal = Math.max(0, minVal - 1);
-        maxVal = maxVal + 1;
-      }
-      const paddingY = (maxVal - minVal) * 0.2;
-      const yMin = Math.max(0, Math.floor(minVal - paddingY));
-      const yMax = Math.ceil(maxVal + paddingY);
+      const minVal = Math.min(...values);
+      const maxVal = Math.max(...values);
+      const dataRange = maxVal - minVal;
+      const padY = Math.max(dataRange * 0.25, 3);
+      const yMin = Math.max(0, Math.floor(minVal - padY));
+      const yMax = Math.ceil(maxVal + padY);
       const yRange = yMax - yMin || 1;
 
-      // 网格线（水平 4 条）
-      ctx.setStrokeStyle('#F0F0F0');
-      ctx.setLineWidth(0.5);
-      for (let i = 0; i <= 4; i++) {
-        const y = padding.top + chartH - (chartH / 4) * i;
+      // 2条淡参考线（顶部和底部）
+      ctx.strokeStyle = '#F0F0F0';
+      ctx.lineWidth = 1;
+      [0, 1].forEach(i => {
+        const y = padding.top + chartH * i;
         ctx.beginPath();
         ctx.moveTo(padding.left, y);
         ctx.lineTo(padding.left + chartW, y);
         ctx.stroke();
-      }
-
-      // Y 轴标签
-      ctx.setFontSize(11);
-      ctx.setFillStyle('#BBBBBB');
-      ctx.setTextAlign('right');
-      for (let i = 0; i <= 4; i++) {
-        const yVal = yMin + (yRange / 4) * i;
-        const y = padding.top + chartH - (chartH / 4) * i;
-        ctx.fillText(String(Math.round(yVal * 10) / 10), padding.left - 10, y + 4);
-      }
+      });
 
       // 计算点坐标
       const count = data.length;
+      const stepX = count <= 1 ? 0 : chartW / (count - 1);
       const points = data.map((item, index) => {
         const x = count === 1
           ? padding.left + chartW / 2
-          : padding.left + (chartW / (count - 1)) * index;
+          : padding.left + stepX * index;
         const y = padding.top + chartH - ((Number(item.value) - yMin) / yRange) * chartH;
         return { x, y, value: item.value, date: item.date };
       });
 
-      // 渐变填充区域
+      // 渐变填充
       ctx.beginPath();
       ctx.moveTo(points[0].x, padding.top + chartH);
       points.forEach(p => ctx.lineTo(p.x, p.y));
       ctx.lineTo(points[points.length - 1].x, padding.top + chartH);
       ctx.closePath();
       const grd = ctx.createLinearGradient(0, padding.top, 0, padding.top + chartH);
-      grd.addColorStop(0, 'rgba(74, 124, 255, 0.18)');
-      grd.addColorStop(1, 'rgba(74, 124, 255, 0.02)');
-      ctx.setFillStyle(grd);
+      grd.addColorStop(0, 'rgba(74, 124, 255, 0.12)');
+      grd.addColorStop(1, 'rgba(74, 124, 255, 0.01)');
+      ctx.fillStyle = grd;
       ctx.fill();
 
       // 折线
-      ctx.setStrokeStyle('#4A7CFF');
-      ctx.setLineWidth(3);
-      ctx.setLineJoin('round');
-      ctx.setLineCap('round');
+      ctx.strokeStyle = '#4A7CFF';
+      ctx.lineWidth = 3;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
       ctx.beginPath();
       points.forEach((p, i) => {
         if (i === 0) ctx.moveTo(p.x, p.y);
@@ -132,52 +129,66 @@ Component({
       });
       ctx.stroke();
 
+      // 找出最高和最低点
+      const maxPoint = points.reduce((a, b) => (Number(a.value) > Number(b.value) ? a : b));
+      const minPoint = points.reduce((a, b) => (Number(a.value) < Number(b.value) ? a : b));
+
       // 数据点 + 标签
-      points.forEach((p, i) => {
+      points.forEach((p) => {
+        const isMax = p === maxPoint;
+        const isMin = p === minPoint && !isMax;
+        const showLabel = isMax || isMin;
+
         // 外圈
         ctx.beginPath();
-        ctx.arc(p.x, p.y, 5, 0, Math.PI * 2);
-        ctx.setFillStyle('#FFFFFF');
+        ctx.arc(p.x, p.y, showLabel ? 6 : 4.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#FFFFFF';
         ctx.fill();
-        ctx.setStrokeStyle('#4A7CFF');
-        ctx.setLineWidth(2.5);
+        ctx.strokeStyle = isMax ? '#FF6B6B' : '#4A7CFF';
+        ctx.lineWidth = showLabel ? 3 : 2;
         ctx.stroke();
 
-        // 数值标签（所有点都显示，但避免和折线重叠：放在上方）
-        const isHighest = Number(p.value) === maxVal;
-        const labelY = isHighest ? p.y - 14 : p.y - 14;
-        ctx.setFillStyle(isHighest ? '#FF6B6B' : '#4A7CFF');
-        ctx.setFontSize(13);
-        ctx.setTextAlign('center');
-        ctx.fillText(String(p.value), p.x, labelY);
-      });
+        // 标签
+        if (showLabel) {
+          const label = String(p.value);
+          ctx.font = 'bold 13px sans-serif';
+          const metrics = ctx.measureText(label);
+          const textW = metrics.width;
 
-      // X 轴日期（去重，避免重复绘制）
-      ctx.setFillStyle('#BBBBBB');
-      ctx.setFontSize(11);
-      const showSet = new Set();
-      // 只显示第一个和最后一个，中间均匀取一个
-      const indicesToShow = [];
-      indicesToShow.push(0);
-      if (count > 2) {
-        indicesToShow.push(Math.floor(count / 2));
-      }
-      if (count > 1) {
-        indicesToShow.push(count - 1);
-      }
-      indicesToShow.forEach(idx => {
-        if (idx >= 0 && idx < points.length && !showSet.has(idx)) {
-          showSet.add(idx);
-          const p = points[idx];
-          ctx.setTextAlign(
-            idx === 0 ? 'left' : idx === points.length - 1 ? 'right' : 'center'
-          );
-          const dateStr = p.date ? p.date.slice(5) : '';
-          ctx.fillText(dateStr, p.x, padding.top + chartH + 18);
+          // 白色背景
+          ctx.fillStyle = 'rgba(255,255,255,0.92)';
+          const bgX = p.x - textW / 2 - 5;
+          const bgW = textW + 10;
+          const bgH = 20;
+
+          if (isMax) {
+            ctx.fillRect(bgX, p.y - 28, bgW, bgH);
+            ctx.fillStyle = '#FF6B6B';
+            ctx.textAlign = 'center';
+            ctx.fillText(label, p.x, p.y - 14);
+          } else {
+            ctx.fillRect(bgX, p.y + 10, bgW, bgH);
+            ctx.fillStyle = '#4A7CFF';
+            ctx.textAlign = 'center';
+            ctx.fillText(label, p.x, p.y + 24);
+          }
         }
       });
 
-      ctx.draw();
+      // X 轴日期：只显示首尾
+      ctx.font = '11px sans-serif';
+      ctx.fillStyle = '#AAAAAA';
+
+      const first = points[0];
+      const last = points[points.length - 1];
+
+      ctx.textAlign = 'left';
+      ctx.fillText(first.date ? first.date.slice(5) : '', first.x, padding.top + chartH + 18);
+
+      if (points.length > 1) {
+        ctx.textAlign = 'right';
+        ctx.fillText(last.date ? last.date.slice(5) : '', last.x, padding.top + chartH + 18);
+      }
     },
   },
 });

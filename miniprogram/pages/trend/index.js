@@ -46,6 +46,7 @@ Page({
       .get()
       .then(res => {
         const list = res.data || [];
+        console.log('【调试】indicators 查询结果条数:', list.length, list);
         const ascList = list.slice().reverse();
         this.setData({ indicatorList: ascList, loading: false });
         this.filterData(this.data.currentRange);
