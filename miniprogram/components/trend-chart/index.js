@@ -133,11 +133,14 @@ Component({
       const maxPoint = points.reduce((a, b) => (Number(a.value) > Number(b.value) ? a : b));
       const minPoint = points.reduce((a, b) => (Number(a.value) < Number(b.value) ? a : b));
 
+      // 是否显示全部标签
+      const showAllLabels = points.length <= 6;
+
       // 数据点 + 标签
-      points.forEach((p) => {
+      points.forEach((p, idx) => {
         const isMax = p === maxPoint;
         const isMin = p === minPoint && !isMax;
-        const showLabel = isMax || isMin;
+        const showLabel = showAllLabels || isMax || isMin;
 
         // 外圈
         ctx.beginPath();
@@ -151,7 +154,8 @@ Component({
         // 标签
         if (showLabel) {
           const label = String(p.value);
-          ctx.font = 'bold 13px sans-serif';
+          const isHighlight = isMax || isMin;
+          ctx.font = isHighlight ? 'bold 13px sans-serif' : '12px sans-serif';
           const metrics = ctx.measureText(label);
           const textW = metrics.width;
 
@@ -159,16 +163,19 @@ Component({
           ctx.fillStyle = 'rgba(255,255,255,0.92)';
           const bgX = p.x - textW / 2 - 5;
           const bgW = textW + 10;
-          const bgH = 20;
+          const bgH = isHighlight ? 20 : 18;
 
-          if (isMax) {
+          // 智能上下布局：全部显示时，偶数索引放上方，奇数索引放下方，避免相邻重叠
+          const putTop = showAllLabels ? (idx % 2 === 0) : isMax;
+
+          if (putTop) {
             ctx.fillRect(bgX, p.y - 28, bgW, bgH);
-            ctx.fillStyle = '#FF6B6B';
+            ctx.fillStyle = isMax ? '#FF6B6B' : '#4A7CFF';
             ctx.textAlign = 'center';
             ctx.fillText(label, p.x, p.y - 14);
           } else {
             ctx.fillRect(bgX, p.y + 10, bgW, bgH);
-            ctx.fillStyle = '#4A7CFF';
+            ctx.fillStyle = isMin ? '#4A7CFF' : '#5B8DEF';
             ctx.textAlign = 'center';
             ctx.fillText(label, p.x, p.y + 24);
           }
