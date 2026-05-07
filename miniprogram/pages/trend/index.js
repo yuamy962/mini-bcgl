@@ -13,6 +13,7 @@ Page({
       { label: '12次', value: 12 },
     ],
     riskInfo: null,
+    trendSummary: '',
     disclaimerAccepted: false,
   },
 
@@ -69,6 +70,25 @@ Page({
     const filtered = this.data.indicatorList.slice(start);
     this.setData({ filteredList: filtered });
     this.checkRisk(filtered);
+    this.genTrendSummary(filtered);
+  },
+
+  genTrendSummary(list) {
+    if (list.length < 2) {
+      this.setData({ trendSummary: '' });
+      return;
+    }
+    const first = Number(list[0].value);
+    const last = Number(list[list.length - 1].value);
+    const diff = last - first;
+    const pct = first !== 0 ? Math.round(Math.abs(diff) / first * 100) : 0;
+    const direction = diff < 0 ? '下降' : diff > 0 ? '上升' : '稳定';
+    const times = list.length;
+    let summary = `近${times}次 TPSA 呈${direction}趋势`;
+    if (pct > 0) {
+      summary += `，约 ${pct}%`;
+    }
+    this.setData({ trendSummary: summary });
   },
 
   checkRisk(list) {

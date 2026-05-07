@@ -26,6 +26,21 @@
   font-weight: 500;
 }
 
+.trend-summary {
+  margin: 0 32rpx 24rpx;
+  padding: 28rpx 32rpx;
+  background: var(--primary-light);
+  border-radius: var(--radius);
+  border-left: 6rpx solid var(--primary);
+}
+
+.summary-text {
+  font-size: 30rpx;
+  color: var(--text-main);
+  line-height: 1.6;
+  font-weight: 500;
+}
+
 .range-tabs {
   display: flex;
   justify-content: center;

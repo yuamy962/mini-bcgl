@@ -14,6 +14,11 @@
     </view>
   </view>
 
+  <!-- 趋势总结 -->
+  <view class="trend-summary" wx:if="{{!loading && filteredList.length >= 2}}">
+    <text class="summary-text">{{trendSummary}}</text>
+  </view>
+
   <!-- 图表 -->
   <view class="card chart-card" wx:if="{{!loading && filteredList.length > 0}}">
     <trend-chart data="{{filteredList}}" />
@@ -21,6 +26,10 @@
 
   <view class="card chart-empty" wx:if="{{!loading && filteredList.length === 0}}">
     <text class="empty-text">暂无 PSA 记录，请在首页添加</text>
+  </view>
+
+  <view class="card chart-empty" wx:if="{{!loading && filteredList.length === 1}}">
+    <text class="empty-text">已有 1 条记录，再添加 1 条即可查看趋势</text>
   </view>
 
   <loading-state wx:if="{{loading}}" />
