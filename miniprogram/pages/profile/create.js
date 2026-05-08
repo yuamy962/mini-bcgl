@@ -4,7 +4,7 @@ Page({
   data: {
     form: {
       name: '',
-      age: '',
+      birthDate: '',
       gender: '男',
       cancerType: '前列腺癌',
       diagnosisDate: '',
@@ -30,8 +30,8 @@ Page({
     this.setData({ 'form.name': e.detail.value });
   },
 
-  onAgeInput(e) {
-    this.setData({ 'form.age': e.detail.value });
+  onBirthDateChange(e) {
+    this.setData({ 'form.birthDate': e.detail.value });
   },
 
   onGenderChange(e) {
@@ -65,7 +65,7 @@ Page({
     const { form } = this.data;
     const result = validate([
       { value: form.name, validators: [validators.name] },
-      { value: form.age, validators: [validators.age] },
+      { value: form.birthDate, validators: [validators.birthDate] },
       { value: form.diagnosisDate, validators: [(v) => v ? true : '请选择确诊时间'] },
     ]);
     return result;
@@ -86,7 +86,6 @@ Page({
       .add({
         data: {
           ...form,
-          age: Number(form.age),
           createTime: db.serverDate(),
           updateTime: db.serverDate(),
         },
@@ -94,10 +93,8 @@ Page({
       .then((res) => {
         hideLoading();
         toast('创建成功', 'success');
-        // 更新全局数据
         const app = getApp();
         app.globalData.patientInfo = { ...form, _id: res._id, _openid: app.globalData.openid };
-        // 跳转到首页
         setTimeout(() => {
           wx.switchTab({ url: '/pages/home/index' });
         }, 800);

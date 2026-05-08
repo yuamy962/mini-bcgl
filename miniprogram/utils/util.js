@@ -35,6 +35,20 @@ const addDays = (dateStr, days) => {
   return formatDate(d);
 };
 
+// 根据出生日期计算年龄
+const calculateAge = (birthDate) => {
+  if (!birthDate) return null;
+  const birth = new Date(birthDate.replace(/-/g, '/'));
+  if (isNaN(birth.getTime())) return null;
+  const now = new Date();
+  let age = now.getFullYear() - birth.getFullYear();
+  const monthDiff = now.getMonth() - birth.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < birth.getDate())) {
+    age--;
+  }
+  return age;
+};
+
 // 表单校验
 const validators = {
   required: (value, msg = '此项为必填项') => {
@@ -50,6 +64,14 @@ const validators = {
   age: (value) => {
     const age = Number(value);
     if (isNaN(age) || age < 1 || age > 150) return '请输入有效的年龄（1-150）';
+    return true;
+  },
+  birthDate: (value) => {
+    if (!value) return '请选择出生日期';
+    const d = new Date(value.replace(/-/g, '/'));
+    if (isNaN(d.getTime())) return '日期格式不正确';
+    const now = new Date();
+    if (d > now) return '出生日期不能晚于今天';
     return true;
   },
   number: (value, min, max) => {
@@ -115,6 +137,7 @@ module.exports = {
   formatDateTime,
   daysDiff,
   addDays,
+  calculateAge,
   validators,
   validate,
   debounce,

@@ -1,12 +1,14 @@
+@import "../../styles/form-cell.wxss";
+
 .create-page {
   min-height: 100vh;
-  background: var(--white);
+  background: var(--bg);
   padding-bottom: 60rpx;
 }
 
 .create-header {
-  padding: 72rpx 40rpx 48rpx;
-  background: linear-gradient(180deg, var(--primary-light) 0%, var(--white) 100%);
+  padding: 72rpx 32rpx 48rpx;
+  background: linear-gradient(180deg, var(--primary-light) 0%, var(--bg) 100%);
 }
 
 .create-title {
@@ -22,5 +24,5 @@
 }
 
 .create-form {
-  padding: 24rpx 40rpx;
+  padding: 24rpx 32rpx;
 }

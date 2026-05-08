@@ -5,18 +5,27 @@
     <canvas canvas-id="summaryCanvas" class="hidden-canvas"></canvas>
 
     <view class="summary-content">
-      <!-- 标题区 -->
-      <view class="summary-header">
-        <view class="summary-title">病程摘要</view>
-        <view class="summary-meta">
-          <text>患者 {{summaryData.patientInfo.name || ''}}</text>
-          <text>{{summaryData.generatedAt}} 整理</text>
+      <!-- 顶部品牌色标题区 -->
+      <view class="summary-hero">
+        <view class="summary-hero-title">病程摘要</view>
+        <view class="summary-hero-sub">Prostate Care Journey</view>
+      </view>
+
+      <!-- 患者信息卡片 -->
+      <view class="patient-card">
+        <view class="patient-avatar">{{summaryData.patientInfo.name ? summaryData.patientInfo.name.charAt(0) : '患'}}</view>
+        <view class="patient-info">
+          <view class="patient-name">{{summaryData.patientInfo.name || ''}}</view>
+          <view class="patient-date">生成日期：{{summaryData.generatedAt}}</view>
         </view>
       </view>
 
-      <!-- 自然语言总结区块 -->
+      <!-- 最近病情变化 -->
       <view class="section-block narrative-block" wx:if="{{summaryData.psaTrend || summaryData.treatments.length > 0 || summaryData.checks.length > 0}}">
-        <view class="block-title">最近病情变化</view>
+        <view class="block-header">
+          <view class="block-header-bar primary"></view>
+          <view class="block-header-text">最近病情变化</view>
+        </view>
         <view class="narrative-list">
           <view class="narrative-item" wx:if="{{summaryData.psaTrend}}">
             <view class="narrative-dot {{summaryData.psaTrend.direction === 'down' ? 'down' : summaryData.psaTrend.direction === 'up' ? 'up' : ''}}"></view>
@@ -39,18 +48,69 @@
 
       <!-- 指标明细 -->
       <view class="section-block" wx:if="{{summaryData.psaList.length > 0}}">
-        <view class="block-title">指标记录</view>
+        <view class="block-header">
+          <view class="block-header-bar primary"></view>
+          <view class="block-header-text">指标记录</view>
+        </view>
         <view class="block-list">
           <view class="block-item" wx:for="{{summaryData.psaList}}" wx:key="_id">
             <text class="item-date">{{item.date}}</text>
-            <text class="item-value">{{item.value}} ng/mL</text>
+            <text class="item-value {{index > 0 && item.value > summaryData.psaList[index-1].value ? 'up' : ''}}">{{item.value}} ng/mL</text>
           </view>
         </view>
       </view>
 
+      <!-- 治疗记录 -->
+      <view class="section-block">
+        <view class="block-header">
+          <view class="block-header-bar success"></view>
+          <view class="block-header-text">治疗记录</view>
+        </view>
+        <view class="block-list" wx:if="{{summaryData.treatments.length > 0}}">
+          <view class="block-item" wx:for="{{summaryData.treatments}}" wx:key="_id">
+            <text class="item-date">{{item.date}}</text>
+            <text class="item-text">{{item.title}}</text>
+          </view>
+        </view>
+        <view class="block-empty" wx:else>暂无记录</view>
+      </view>
+
+      <!-- 检查记录 -->
+      <view class="section-block">
+        <view class="block-header">
+          <view class="block-header-bar purple"></view>
+          <view class="block-header-text">检查记录</view>
+        </view>
+        <view class="block-list" wx:if="{{summaryData.checks.length > 0}}">
+          <view class="block-item" wx:for="{{summaryData.checks}}" wx:key="_id">
+            <text class="item-date">{{item.date}}</text>
+            <text class="item-text">{{item.title || item.checkType + '检查'}}</text>
+          </view>
+        </view>
+        <view class="block-empty" wx:else>暂无记录</view>
+      </view>
+
+      <!-- 医生建议 -->
+      <view class="section-block">
+        <view class="block-header">
+          <view class="block-header-bar cyan"></view>
+          <view class="block-header-text">医生建议</view>
+        </view>
+        <view class="block-list" wx:if="{{summaryData.visits.length > 0}}">
+          <view class="block-item" wx:for="{{summaryData.visits}}" wx:key="_id">
+            <text class="item-date">{{item.date}}</text>
+            <text class="item-text">{{item.doctorAdvice || '常规复诊'}}</text>
+          </view>
+        </view>
+        <view class="block-empty" wx:else>暂无记录</view>
+      </view>
+
       <!-- 即将到期 -->
-      <view class="section-block" wx:if="{{summaryData.reminders.length > 0}}">
-        <view class="block-title">即将到期</view>
+      <view class="section-block reminder-block" wx:if="{{summaryData.reminders.length > 0}}">
+        <view class="block-header">
+          <view class="block-header-bar warning"></view>
+          <view class="block-header-text">即将到期</view>
+        </view>
         <view class="block-list">
           <view class="block-item" wx:for="{{summaryData.reminders}}" wx:key="_id">
             <text class="item-date">{{item.nextDate}}</text>
@@ -61,7 +121,7 @@
 
       <!-- 免责声明 -->
       <view class="disclaimer">
-        <text>本摘要仅用于病程整理，不作为医疗诊断依据</text>
+        <text class="disclaimer-text">本摘要仅用于病程整理，不作为医疗诊断依据</text>
       </view>
     </view>
 

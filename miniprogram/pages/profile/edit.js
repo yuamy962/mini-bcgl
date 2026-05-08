@@ -5,7 +5,7 @@ Page({
   data: {
     form: {
       name: '',
-      age: '',
+      birthDate: '',
       gender: '男',
       cancerType: '前列腺癌',
       diagnosisDate: '',
@@ -32,7 +32,7 @@ Page({
       this.setData({
         form: {
           name: patientInfo.name || '',
-          age: String(patientInfo.age || ''),
+          birthDate: patientInfo.birthDate || '',
           gender: patientInfo.gender || '男',
           cancerType: patientInfo.cancerType || '前列腺癌',
           diagnosisDate: patientInfo.diagnosisDate || '',
@@ -49,8 +49,8 @@ Page({
     this.setData({ 'form.name': e.detail.value });
   },
 
-  onAgeInput(e) {
-    this.setData({ 'form.age': e.detail.value });
+  onBirthDateChange(e) {
+    this.setData({ 'form.birthDate': e.detail.value });
   },
 
   onGenderChange(e) {
@@ -84,7 +84,7 @@ Page({
     const { form } = this.data;
     const result = validate([
       { value: form.name, validators: [validators.name] },
-      { value: form.age, validators: [validators.age] },
+      { value: form.birthDate, validators: [validators.birthDate] },
       { value: form.diagnosisDate, validators: [(v) => v ? true : '请选择确诊时间'] },
     ]);
     return result;
@@ -111,15 +111,13 @@ Page({
       .update({
         data: {
           ...form,
-          age: Number(form.age),
           updateTime: db.serverDate(),
         },
       })
       .then(() => {
         hideLoading();
         toast('保存成功', 'success');
-        // 更新全局数据
-        app.globalData.patientInfo = { ...app.globalData.patientInfo, ...form, age: Number(form.age) };
+        app.globalData.patientInfo = { ...app.globalData.patientInfo, ...form };
         setTimeout(() => {
           wx.navigateBack();
         }, 800);
