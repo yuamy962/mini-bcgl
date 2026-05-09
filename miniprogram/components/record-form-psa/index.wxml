@@ -20,7 +20,7 @@
 
   <view class="form-cell">
     <text class="form-cell-label">医院</text>
-    <input class="form-cell-input" placeholder="可选" placeholder-class="placeholder" value="{{form.hospital}}" bindinput="onHospitalInput" />
+    <input class="form-cell-input" placeholder="可选填" placeholder-class="placeholder" value="{{form.hospital}}" bindinput="onHospitalInput" />
   </view>
 </view>
 

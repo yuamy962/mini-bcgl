@@ -11,10 +11,10 @@
         <input class="form-cell-input" placeholder="请输入姓名" value="{{form.name}}" bindinput="onNameInput" maxlength="20" />
       </view>
 
-      <picker mode="date" bindchange="onBirthDateChange" value="{{form.birthDate}}" end="{{today}}">
+      <picker mode="date" bindchange="onBirthDateChange" value="{{form.birthDate || defaultBirthDate}}" start="1900-01-01" end="{{today}}">
         <view class="form-cell form-cell-arrow">
           <text class="form-cell-label">出生日期 <text class="required">*</text></text>
-          <text class="form-cell-value {{form.birthDate ? '' : 'placeholder'}}">{{form.birthDate || '请选择日期'}}</text>
+          <text class="form-cell-value {{form.birthDate ? '' : 'placeholder'}}">{{form.birthDate ? form.birthDate + '（' + age + '岁）' : '请选择日期'}}</text>
         </view>
       </picker>
 
@@ -38,6 +38,11 @@
           <text class="form-cell-value {{form.diagnosisDate ? '' : 'placeholder'}}">{{form.diagnosisDate || '请选择日期'}}</text>
         </view>
       </picker>
+
+      <view class="form-cell">
+        <text class="form-cell-label">初诊 PSA 数值</text>
+        <input class="form-cell-input" type="digit" placeholder="可选填，单位 ng/mL" value="{{form.initialPSA}}" bindinput="onInitialPSAInput" />
+      </view>
     </view>
 
     <!-- 治疗信息 -->
@@ -51,12 +56,12 @@
 
       <view class="form-cell">
         <text class="form-cell-label">当前医院</text>
-        <input class="form-cell-input" placeholder="可选" value="{{form.hospital}}" bindinput="onHospitalInput" />
+        <input class="form-cell-input" placeholder="可选填" value="{{form.hospital}}" bindinput="onHospitalInput" />
       </view>
 
       <view class="form-cell">
         <text class="form-cell-label">主治医生</text>
-        <input class="form-cell-input" placeholder="可选" value="{{form.doctor}}" bindinput="onDoctorInput" />
+        <input class="form-cell-input" placeholder="可选填" value="{{form.doctor}}" bindinput="onDoctorInput" />
       </view>
     </view>
 

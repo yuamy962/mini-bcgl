@@ -1,4 +1,4 @@
-const { validate, validators, toast, showLoading, hideLoading } = require('../../utils/util.js');
+const { validate, validators, toast, showLoading, hideLoading, calculateAge } = require('../../utils/util.js');
 
 Page({
   data: {
@@ -11,7 +11,10 @@ Page({
       treatmentStatus: '',
       hospital: '',
       doctor: '',
+      initialPSA: '',
     },
+    defaultBirthDate: '1985-01-01',
+    age: null,
     genderOptions: ['男', '女'],
     cancerOptions: ['前列腺癌', '肺癌', '乳腺癌', '胃癌', '肝癌', '其他'],
     statusOptions: ['治疗中', '观察中', '康复期'],
@@ -31,7 +34,11 @@ Page({
   },
 
   onBirthDateChange(e) {
-    this.setData({ 'form.birthDate': e.detail.value });
+    const birthDate = e.detail.value;
+    this.setData({
+      'form.birthDate': birthDate,
+      age: calculateAge(birthDate),
+    });
   },
 
   onGenderChange(e) {
@@ -59,6 +66,10 @@ Page({
 
   onDoctorInput(e) {
     this.setData({ 'form.doctor': e.detail.value });
+  },
+
+  onInitialPSAInput(e) {
+    this.setData({ 'form.initialPSA': e.detail.value });
   },
 
   validateForm() {

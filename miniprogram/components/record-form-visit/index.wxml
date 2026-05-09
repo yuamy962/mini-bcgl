@@ -1,7 +1,7 @@
 <view class="form-card">
   <view class="form-cell">
     <text class="form-cell-label">医院</text>
-    <input class="form-cell-input" placeholder="可选" placeholder-class="placeholder" value="{{form.hospital}}" bindinput="onHospitalInput" />
+    <input class="form-cell-input" placeholder="可选填" placeholder-class="placeholder" value="{{form.hospital}}" bindinput="onHospitalInput" />
   </view>
 
   <picker mode="date" bindchange="onDateChange" value="{{form.date}}" end="{{today}}">
@@ -22,14 +22,14 @@
 <view class="form-card">
   <view class="form-cell form-cell-textarea">
     <view class="form-cell-label">后续方案</view>
-    <textarea placeholder="请输入后续治疗方案（可选）" placeholder-class="placeholder" value="{{form.followUp}}" bindinput="onFollowUpInput" maxlength="1000" />
+    <textarea placeholder="请输入后续治疗方案（可选填）" placeholder-class="placeholder" value="{{form.followUp}}" bindinput="onFollowUpInput" maxlength="1000" />
   </view>
 </view>
 
 <view class="form-card">
   <view class="form-cell form-cell-textarea">
     <view class="form-cell-label">备注</view>
-    <textarea placeholder="其他备注（可选）" placeholder-class="placeholder" value="{{form.remark}}" bindinput="onRemarkInput" maxlength="500" />
+    <textarea placeholder="其他备注（可选填）" placeholder-class="placeholder" value="{{form.remark}}" bindinput="onRemarkInput" maxlength="500" />
   </view>
 </view>
 

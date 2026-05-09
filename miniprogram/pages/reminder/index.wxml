@@ -51,7 +51,7 @@
         </view>
 
         <view class="form-group">
-          <text class="form-label">周期天数（可选）</text>
+          <text class="form-label">周期天数（可选填）</text>
           <input class="form-input" type="number" placeholder="例如：28，不填则为一次性提醒" value="{{form.cycleDays}}" bindinput="onCycleInput" />
         </view>
 
