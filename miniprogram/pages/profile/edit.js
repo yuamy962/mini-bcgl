@@ -132,6 +132,7 @@ Page({
         hideLoading();
         toast('保存成功', 'success');
         app.globalData.patientInfo = { ...app.globalData.patientInfo, ...form };
+        app.globalData.shouldRefreshHome = true;
         setTimeout(() => {
           wx.navigateBack();
         }, 800);

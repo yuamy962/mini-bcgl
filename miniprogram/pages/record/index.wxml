@@ -8,7 +8,7 @@
         <text class="type-label">{{item.label}}</text>
       </view>
     </view>
-    <view class="record-close" bindtap="onClose">取消</view>
+    <view class="record-close" bindtap="onClose">返回</view>
   </view>
 
   <!-- 表单区域 -->

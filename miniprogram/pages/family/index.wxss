@@ -76,6 +76,12 @@
   flex-shrink: 0;
 }
 
+.family-container .btn-primary,
+.family-container .btn-delete {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .btn-delete {
   background: var(--danger-bg);
   color: var(--danger);

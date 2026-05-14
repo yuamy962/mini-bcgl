@@ -51,11 +51,14 @@
 }
 
 .record-close {
-  margin-top: 24rpx;
+  margin-top: 32rpx;
   text-align: center;
   font-size: 30rpx;
-  color: var(--text-tertiary);
-  padding: 20rpx 0;
+  color: var(--text-secondary);
+  background: var(--bg);
+  border-radius: var(--radius-btn);
+  padding: 24rpx 0;
+  font-weight: 500;
 }
 
 .record-form-area {

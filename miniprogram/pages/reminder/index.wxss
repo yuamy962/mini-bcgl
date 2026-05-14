@@ -120,6 +120,12 @@
   padding: 10rpx;
 }
 
+.form-panel .btn-primary {
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+}
+
 .float-add-btn {
   position: fixed;
   bottom: 80rpx;
