@@ -54,8 +54,8 @@
   margin-top: 32rpx;
   text-align: center;
   font-size: 30rpx;
-  color: var(--text-secondary);
-  background: var(--bg);
+  color: var(--primary);
+  background: var(--primary-light);
   border-radius: var(--radius-btn);
   padding: 24rpx 0;
   font-weight: 500;

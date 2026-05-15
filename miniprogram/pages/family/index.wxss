@@ -80,6 +80,7 @@
 .family-container .btn-delete {
   margin-left: 0;
   margin-right: 0;
+  width: 100%;
 }
 
 .btn-delete {
