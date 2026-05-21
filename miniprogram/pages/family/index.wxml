@@ -9,7 +9,7 @@
         <view class="member-avatar">{{item.role === 'admin' || item.memberOpenid === patientId ? '👤' : '👥'}}</view>
         <view class="member-info">
           <text class="member-name">{{item.nickName || '家庭成员'}}</text>
-          <text class="member-role">{{item.memberOpenid === patientId ? '管理员' : '成员'}} · {{item.permission === 'edit' ? '可编辑' : '仅查看'}}</text>
+          <text class="member-role {{isMainUser && item.memberOpenid !== patientId ? 'role-editable' : ''}}" bindtap="{{isMainUser && item.memberOpenid !== patientId ? 'onTogglePermission' : ''}}" data-id="{{item._id}}" data-current="{{item.permission}}">{{item.memberOpenid === patientId ? '管理员' : '成员'}} · {{item.permission === 'edit' ? '可编辑' : '仅查看'}}</text>
         </view>
       </view>
     </view>

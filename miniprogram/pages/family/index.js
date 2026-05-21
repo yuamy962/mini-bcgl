@@ -67,6 +67,35 @@ Page({
     };
   },
 
+  onTogglePermission(e) {
+    if (!this.data.isMainUser) return;
+    const { id, current } = e.currentTarget.dataset;
+    const items = ['可编辑', '仅查看'];
+    const values = ['edit', 'view'];
+    const index = values.indexOf(current);
+
+    wx.showActionSheet({
+      itemList: items,
+      success: (res) => {
+        if (res.tapIndex === index) return;
+        const newPermission = values[res.tapIndex];
+        showLoading('更新中...');
+        const db = wx.cloud.database();
+        db.collection('familyMembers').doc(id).update({
+          data: { permission: newPermission },
+        }).then(() => {
+          hideLoading();
+          toast('权限已更新', 'success');
+          this.loadFamilyData();
+        }).catch((err) => {
+          hideLoading();
+          console.error('更新权限失败', err);
+          toast('更新失败');
+        });
+      },
+    });
+  },
+
   onLeaveFamily() {
     wx.showModal({
       title: '确认退出',
