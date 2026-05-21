@@ -22,6 +22,11 @@
     <text class="form-cell-label">医院</text>
     <input class="form-cell-input" placeholder="可选填" placeholder-class="placeholder" value="{{form.hospital}}" bindinput="onHospitalInput" />
   </view>
+
+  <view class="recent-hospitals" wx:if="{{recentHospitals.length > 0}}">
+    <text class="recent-label">最近：</text>
+    <view class="recent-tag" wx:for="{{recentHospitals}}" wx:key="*this" bindtap="onSelectRecentHospital" data-name="{{item}}">{{item}}</view>
+  </view>
 </view>
 
 <button class="btn-primary" bindtap="onSubmit">保存</button>

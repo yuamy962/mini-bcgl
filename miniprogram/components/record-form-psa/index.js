@@ -17,6 +17,7 @@ Component({
     },
     indicatorOptions: ['TPSA', 'FPSA'],
     today: '',
+    recentHospitals: [],
   },
 
   lifetimes: {
@@ -32,6 +33,8 @@ Component({
           'form.hospital': editData.hospital || '',
         });
       }
+      const recent = wx.getStorageSync('recentHospitals') || [];
+      this.setData({ recentHospitals: recent });
     },
   },
 
@@ -49,11 +52,22 @@ Component({
     onHospitalInput(e) {
       this.setData({ 'form.hospital': e.detail.value });
     },
+    onSelectRecentHospital(e) {
+      this.setData({ 'form.hospital': e.currentTarget.dataset.name });
+    },
     onSubmit() {
       const { form } = this.data;
       if (!form.value || isNaN(Number(form.value))) {
         wx.showToast({ title: '请输入有效的数值', icon: 'none' });
         return;
+      }
+      // 保存最近医院
+      if (form.hospital && form.hospital.trim()) {
+        let recent = wx.getStorageSync('recentHospitals') || [];
+        recent = recent.filter(h => h !== form.hospital.trim());
+        recent.unshift(form.hospital.trim());
+        if (recent.length > 3) recent = recent.slice(0, 3);
+        wx.setStorageSync('recentHospitals', recent);
       }
       this.triggerEvent('submit', {
         data: {

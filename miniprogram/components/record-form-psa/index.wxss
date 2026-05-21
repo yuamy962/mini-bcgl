@@ -1,1 +1,22 @@
 @import "../../styles/form-cell.wxss";
+
+.recent-hospitals {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 16rpx 32rpx 24rpx;
+  gap: 12rpx;
+}
+
+.recent-label {
+  font-size: 24rpx;
+  color: var(--text-tertiary);
+}
+
+.recent-tag {
+  font-size: 24rpx;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 6rpx 20rpx;
+  border-radius: 8rpx;
+}
