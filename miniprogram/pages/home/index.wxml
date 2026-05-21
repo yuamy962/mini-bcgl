@@ -55,6 +55,16 @@
         <text class="action-text">家庭协同</text>
       </view>
     </view>
+
+    <!-- 反馈入口 -->
+    <view class="card feedback-card">
+      <view class="feedback-title">遇到问题？</view>
+      <button class="btn-feedback" open-type="feedback">意见反馈</button>
+      <view class="contact-info">
+        <view>客服微信：ap18909786543</view>
+        <view>客服QQ：954963274</view>
+      </view>
+    </view>
   </block>
 
   <!-- 无档案空状态 -->

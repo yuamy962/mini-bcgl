@@ -83,6 +83,45 @@
   color: var(--text-secondary);
 }
 
+/* === 反馈入口 === */
+.feedback-card {
+  text-align: center;
+  padding: 32rpx;
+}
+
+.feedback-title {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  margin-bottom: 20rpx;
+}
+
+.btn-feedback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-light);
+  color: var(--primary);
+  border-radius: var(--radius-btn);
+  height: 76rpx;
+  line-height: 1;
+  font-size: 28rpx;
+  font-weight: 500;
+  border: none;
+  margin: 0 0 16rpx;
+  width: 100%;
+  padding: 0;
+}
+
+.btn-feedback::after {
+  border: none;
+}
+
+.contact-info {
+  font-size: 24rpx;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+}
+
 .float-add-btn {
   position: fixed;
   bottom: 180rpx;
