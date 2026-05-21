@@ -60,5 +60,6 @@
     <text class="create-time">创建于 {{detail.createTimeStr}}</text>
   </view>
 
+  <button class="btn-primary" bindtap="onEdit">修改记录</button>
   <button class="btn-delete" bindtap="onDelete">删除记录</button>
 </view>

@@ -1,6 +1,13 @@
 const { formatDate } = require('../../utils/util.js');
 
 Component({
+  properties: {
+    editData: {
+      type: Object,
+      value: null,
+    },
+  },
+
   data: {
     form: {
       indicatorType: 'TPSA',
@@ -16,6 +23,15 @@ Component({
     attached() {
       const today = formatDate(new Date());
       this.setData({ today, 'form.date': today });
+      const editData = this.properties.editData;
+      if (editData) {
+        this.setData({
+          'form.indicatorType': editData.indicatorType || 'TPSA',
+          'form.value': editData.value !== undefined ? String(editData.value) : '',
+          'form.date': editData.date || today,
+          'form.hospital': editData.hospital || '',
+        });
+      }
     },
   },
 

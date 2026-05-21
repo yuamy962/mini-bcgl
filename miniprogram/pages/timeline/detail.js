@@ -48,6 +48,14 @@ Page({
       });
   },
 
+  onEdit() {
+    const { detail } = this.data;
+    if (!detail) return;
+    wx.navigateTo({
+      url: `/pages/record/index?mode=edit&id=${detail._id}&type=${detail.type}`,
+    });
+  },
+
   onDelete() {
     confirm('确认删除', '删除后不可恢复，是否继续？').then(ok => {
       if (!ok) return;

@@ -1,6 +1,13 @@
 const { formatDate } = require('../../utils/util.js');
 
 Component({
+  properties: {
+    editData: {
+      type: Object,
+      value: null,
+    },
+  },
+
   data: {
     form: {
       drug: '',
@@ -14,6 +21,14 @@ Component({
     attached() {
       const today = formatDate(new Date());
       this.setData({ today, 'form.startDate': today });
+      const editData = this.properties.editData;
+      if (editData) {
+        this.setData({
+          'form.drug': editData.drug || '',
+          'form.startDate': editData.startDate || today,
+          'form.nextDate': editData.nextDate || '',
+        });
+      }
     },
   },
 

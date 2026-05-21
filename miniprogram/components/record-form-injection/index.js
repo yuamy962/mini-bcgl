@@ -1,6 +1,13 @@
 const { formatDate, addDays } = require('../../utils/util.js');
 
 Component({
+  properties: {
+    editData: {
+      type: Object,
+      value: null,
+    },
+  },
+
   data: {
     form: {
       drug: '诺雷得',
@@ -27,6 +34,16 @@ Component({
         'form.date': today,
         'form.nextDate': nextDate,
       });
+      const editData = this.properties.editData;
+      if (editData) {
+        this.setData({
+          'form.drug': editData.drug || '诺雷得',
+          'form.date': editData.date || today,
+          'form.cycleDays': editData.cycleDays || 28,
+          'form.nextDate': editData.nextDate || nextDate,
+          'form.hospital': editData.hospital || '',
+        });
+      }
     },
   },
 

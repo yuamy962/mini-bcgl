@@ -19,11 +19,11 @@
       <text class="form-placeholder"></text>
     </view>
 
-    <record-form-psa wx:if="{{currentType === 'psa'}}" bindsubmit="onFormSubmit" />
-    <record-form-check wx:if="{{currentType === 'check'}}" bindsubmit="onFormSubmit" />
-    <record-form-injection wx:if="{{currentType === 'injection'}}" bindsubmit="onFormSubmit" />
-    <record-form-medicine wx:if="{{currentType === 'medicine'}}" bindsubmit="onFormSubmit" />
-    <record-form-visit wx:if="{{currentType === 'visit'}}" bindsubmit="onFormSubmit" />
-    <record-form-note wx:if="{{currentType === 'note'}}" bindsubmit="onFormSubmit" />
+    <record-form-psa wx:if="{{currentType === 'psa'}}" editData="{{editData}}" bindsubmit="onFormSubmit" />
+    <record-form-check wx:if="{{currentType === 'check'}}" editData="{{editData}}" bindsubmit="onFormSubmit" />
+    <record-form-injection wx:if="{{currentType === 'injection'}}" editData="{{editData}}" bindsubmit="onFormSubmit" />
+    <record-form-medicine wx:if="{{currentType === 'medicine'}}" editData="{{editData}}" bindsubmit="onFormSubmit" />
+    <record-form-visit wx:if="{{currentType === 'visit'}}" editData="{{editData}}" bindsubmit="onFormSubmit" />
+    <record-form-note wx:if="{{currentType === 'note'}}" editData="{{editData}}" bindsubmit="onFormSubmit" />
   </view>
 </view>
