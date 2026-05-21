@@ -5,6 +5,7 @@ Page({
   data: {
     indicatorList: [],
     filteredList: [],
+    recordList: [],
     loading: true,
     currentRange: 6,
     rangeOptions: [
@@ -69,7 +70,8 @@ Page({
     const total = this.data.indicatorList.length;
     const start = Math.max(0, total - range);
     const filtered = this.data.indicatorList.slice(start);
-    this.setData({ filteredList: filtered });
+    const recordList = filtered.slice().reverse(); // 倒序用于列表展示
+    this.setData({ filteredList: filtered, recordList });
     this.checkRisk(filtered);
     this.genTrendSummary(filtered);
   },

@@ -40,9 +40,9 @@
   </view>
 
   <!-- 最近记录列表 -->
-  <view class="section-title" wx:if="{{!loading && filteredList.length > 0}}">最近记录</view>
-  <view class="record-list" wx:if="{{!loading && filteredList.length > 0}}">
-    <view class="record-item" wx:for="{{filteredList}}" wx:key="_id">
+  <view class="section-title" wx:if="{{!loading && recordList.length > 0}}">最近记录</view>
+  <view class="record-list" wx:if="{{!loading && recordList.length > 0}}">
+    <view class="record-item" wx:for="{{recordList}}" wx:key="_id">
       <text class="record-date">{{item.date}}</text>
       <text class="record-value">{{item.value}} ng/mL</text>
       <text class="record-hospital" wx:if="{{item.hospital}}">{{item.hospital}}</text>

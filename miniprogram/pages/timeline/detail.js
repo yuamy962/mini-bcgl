@@ -58,13 +58,29 @@ Page({
   doDelete() {
     showLoading('删除中...');
     const db = wx.cloud.database();
-    const { id } = this.data;
+    const { id, detail } = this.data;
+    const patientId = app.globalData.currentPatientId;
 
     db.collection('timeline').doc(id).remove()
+      .then(() => {
+        // 如果是 PSA 记录，同步删除 indicators 中对应数据
+        if (detail.type === 'psa' && detail.value !== undefined && detail.date) {
+          return db.collection('indicators')
+            .where({ patientId, indicatorType: 'TPSA', date: detail.date })
+            .get()
+            .then(res => {
+              const target = res.data.find(item => String(item.value) === String(detail.value));
+              if (target) {
+                return db.collection('indicators').doc(target._id).remove();
+              }
+            });
+        }
+      })
       .then(() => {
         hideLoading();
         toast('已删除', 'success');
         app.globalData.shouldRefreshTimeline = true;
+        app.globalData.shouldRefreshHome = true;
         setTimeout(() => wx.navigateBack(), 600);
       })
       .catch(err => {
